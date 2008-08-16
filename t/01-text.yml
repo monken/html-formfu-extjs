@@ -1,0 +1,10 @@
+---
+
+elements:
+  - type: Text
+    name: test
+    id: test_id
+  - type: Text
+    name: test2
+    label: Test
+    

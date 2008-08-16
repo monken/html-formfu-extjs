@@ -1,0 +1,13 @@
+---
+elements:
+  - type: Text
+    name: title
+    label: Title
+  - type: Date
+    name: date2
+    label: Default
+    default_natural: 'today'
+  - type: Date
+    name: date
+    label: Date
+    

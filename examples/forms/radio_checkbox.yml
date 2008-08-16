@@ -1,0 +1,9 @@
+---
+elements:
+  - type: Radio
+    name: foo
+    label: test
+  - type: Checkbox
+    name: foo2
+    label: test3
+    
