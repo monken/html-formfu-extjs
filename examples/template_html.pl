@@ -20,6 +20,8 @@ sub render_html {
 </head>
 <body>
 
+<a href="../forms/$param{form}.yml">Form config file</a><br/><br/>
+
 $param{html}
 
 </body>

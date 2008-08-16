@@ -12,7 +12,7 @@ sub render {
 	my $data;
 	foreach my $option ( @{ $self->_options } ) {
 		push( @{$data}, [ $option->{value}, $option->{label} ] );
-		if(my @groups = @{$option->{group}}) {
+		if($option->{group} && (my @groups = @{$option->{group}})) {
 			foreach my $item (@groups) {
 				push(@{$data}, [$item->{value},$item->{label}]);
 			}

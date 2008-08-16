@@ -37,6 +37,9 @@ Ext.onReady(function(){
 <body>
 
 
+<a href="../forms/$param{form}.yml">Form config file</a><br/><br/>
+
+
 
 </body>
 </html>

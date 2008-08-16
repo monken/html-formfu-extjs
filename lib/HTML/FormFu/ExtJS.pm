@@ -13,11 +13,59 @@ $VERSION = eval $VERSION;    # see L<perlmodstyle>
 
 use HTML::FormFu::Util qw/require_class/;
 
+
+
+=head1 NAME
+
+HTML::FormFu::ExtJS - Render ExtJS forms using HTML::FormFu
+
+=head1 DESCRIPTION
+
+This module allows you to render ExtJS forms without changing your HTML::FormFu config file.
+
+  use HTML::FormFu::ExtJS;
+  my $form = new HTML::FormFu::ExtJS;
+  $form->load_config_file('forms/config.yml');
+
+  print <<JAVASCRIPT;
+    var simple = new Ext.FormPanel({
+      title: 'Simple Form',
+      items: $form->render_items,
+      buttons: $form->render_buttons
+    });
+  JAVASCRIPT
+
+HTML::FormFu::ExtJS subclasses HTML::FormFu therefore you can access all of its methods via C<$form>.
+
+If you want to generate grid data and data records for ExtJS have a look at L<HTML::FormFu::ExtJS::Grid>.
+
+This module requires ExtJS 2.2 or greater. Most of the elements work with ExtJS 2.0 or greater too.
+
+=head1 EXAMPLES
+
+Check out the examples in C<examples/html>.
+
+=head1 METHODS
+
+A HTML::FormFu::ExtJS object has all methods of a L<HTML::FormFu> object. But there are some additional methods avaiable:
+
+=head2 render_items
+
+This method returns all elements in the JavaScript Object Notation (JSON). You can put this string
+right into the C<items> attribute of your ExtJS form panel.
+
+=head2 _render_items
+
+Acts like L</render_items> but returns a perl object instead.
+
+=cut
+
 sub _render_items {
 	my $self   = shift;
 	my $from   = shift || $self;
 	my $output = [];
 	foreach my $element ( @{ $from->get_elements() } ) {
+		next if ( $element->type eq "Submit" || $element->type eq "Button" || $element->type eq "ContentButton" );
 		my $class = "HTML::FormFu::ExtJS::Element::" . $element->type;
 		require_class($class);
 		push( @{$output}, $class->render($element) );
@@ -29,6 +77,38 @@ sub render_items {
 	my $self = shift;
 	return js_dumper( $self->_render_items );
 }
+
+=head2 render_buttons
+
+C<render_buttons> returns all buttons specified in C<$form> as a JSON string.
+Put it right into the C<buttons> attribute of your ExtJS form panel.
+
+=head2 _render_buttons
+
+Acts like L</render_buttons> but returns a perl object instead.
+
+=cut
+
+sub render_buttons {
+	my $self = shift;
+	return js_dumper( $self->_render_buttons );
+}
+
+sub _render_buttons {
+	my $self   = shift;
+	my $from   = shift || $self;
+	my $output = [];
+	foreach my $element ( @{ $from->get_elements() } ) {
+		next unless ( $element->type eq "Submit" || $element->type eq "Button" || $element->type eq "ContentButton" );
+		my $class = "HTML::FormFu::ExtJS::Element::" . $element->type;
+		require_class($class);
+		push( @{$output}, $class->render($element) );
+	}
+	return $output;
+}
+
+
+# Altlasten
 
 sub ext_items {
 	my $self = shift;
@@ -136,59 +216,6 @@ sub _get_attributes {
 	return %{$obj};
 }
 
-sub ext_buttons {
-	my $self = shift;
-	my @buttons;
-	for ( @{ $self->get_elements() } ) {
-		next unless ( $_->type eq "Submit" || $_->type eq "Button" );
-		push( @buttons,
-			sprintf( "{text: '%s', handler: submitForm}", $_->value ) );
-	}
-	return "[" . join( ",\n", @buttons ) . "]";
-}
-
-sub ext_grid_data {
-	my $self = shift;
-	my $data = shift;
-	use DBIx::Class::ResultClass::HashRefInflator;
-	if ( ref $data eq "DBIx::Class::ResultSet" ) {
-
-		#$data->result_class('DBIx::Class::ResultClass::HashRefInflator');
-		my @data = $data->all;
-		$data = \@data;
-	}
-	my @return;
-	my @all_elements = @{ $self->get_all_elements() };
-	my ( %element_cache, %deflator_cache, %options_cache );
-	foreach my $datum ( @{$data} ) {
-		my $obj;
-		foreach my $column (@all_elements) {
-			next if ( $column->type =~ /submit/i );
-			my $name = $column->name;
-			my $element = $element_cache{$name} || $self->get_element($name);
-			$element_cache{$name} ||= $element;
-			next unless ($element);
-			$obj->{$name} = $datum->$name;
-			my $deflators = $deflator_cache{$name} || $element->get_deflators;
-			$deflator_cache{$name} ||= $deflators;
-
-			foreach my $deflator ( @{$deflators} ) {
-
-				$obj->{$name} = $deflator->deflator( $obj->{$name} );
-			}
-			my $can_options = $options_cache{$name}
-			  || $element->can("_options");
-			$options_cache{$name} ||= $element->can("_options");
-			if ($can_options) {
-				my @options = @{ $element->_options };
-				my @option = grep { $_->{value} eq $obj->{$name} } @options;
-				$obj->{$name} = $option[0]->{label};
-			}
-		}
-		push( @return, $obj );
-	}
-	return \@return;
-}
 
 sub ext_columns {
 	my $self = shift;
@@ -204,21 +231,43 @@ sub _ext_columns {
 	return \@childs;
 }
 
-sub ext_data_reader {
-	my $form = shift;
-	my @add  = @_;
-	my $data;
-	for ( @{ $form->ext_columns() } ) {
-		push( @{$data}, { name => $_->name } )
-		  if ( $_->can("name") && $_->name );
-	}
-	for (@add) {
-		push( @{$data}, { name => $_ } );
-	}
-	return js_dumper($data);
+
+=head2 validation_response
+
+Returns the validation response ExtJS expects. If the submitted values have errors
+the error strings are formatted as a JSON string and returned. Send this string
+back to the user if you want ExtJS to mark the invalid fields or to report a success.
+
+If the submission was successful the response contains a C<data> object which contains
+all submitted values.
+
+Examples:
+
+  { "success" : 0,
+    "errors"  : [
+      { "msg" : "This field is required",
+        "id"  : "field" }
+    ]
+  }
+
+
+  { "success" : 1,
+    "data"    : { field: "value" }
+  }
+
+=head2 _validation_response
+
+Acts like L</validation_response> but returns a perl object instead.
+
+=cut
+
+*ext_validation = \&_validation_response;
+
+sub validation_response {
+	return js_dumper(shift->_validation_response);
 }
 
-sub ext_validation {
+sub _validation_response {
 	my $form = shift;
 	if ( $form->submitted_and_valid ) {
 		my $return = { success => 1 };
@@ -245,17 +294,37 @@ sub ext_validation {
 
 1;
 
-=head1 Avaiable Elements
+=head1 KNOWN PROBLEMS
 
-=over 
+=head2 L<Multi|HTML::FormFu::ExtJS::Element::Multi>
 
-=item L<Blank|HTML::FormFu::ExtJS::Element::Blank>
+The Multi element is rendered using the ExtJS column layout. It seems like this 
+layout doesn't allow a label next to it. If you want a label anyway you can add 
+a L<Src|HTML::FormFu::ExtJS::Element::Src> as the first element and set it's content
+to the label.
 
-=item L<Hidden|HTML::FormFu::ExtJS::Element::Hidden>
+=head2 L<Select|HTML::FormFu::ExtJS::Element::Select>
 
-=item L<Hr|HTML::FormFu::ExtJS::Element::Hr>
+Optgroups are partially supported. They render as a normal element of the select box and 
+are therefore selectable.
 
-=item L<Hr|HTML::FormFu::ExtJS::Element::Select>
+=head2 L<File|HTML::FormFu::ExtJS::Element::File>
 
-=item L<Text|HTML::FormFu::ExtJS::Element::Text>
+With ExtJS 2.2 comes an option of the form panel which allows file uploads. Make sure you set
+C<fileUpload> at the form panel to C<true>.
 
+See L<http://extjs.com/deploy/dev/docs/?class=Ext.form.BasicForm> / fileUpload.
+
+=head1 SEE ALSO
+
+L<HTML::FormFu>, L<JavaScript::Dumper>
+
+=head1 COPYRIGHT & LICENSE
+
+Copyright 2008 Moritz Onken, all rights reserved.
+
+This program is free software; you can redistribute it and/or modify it
+under the same terms as Perl itself.
+
+
+=cut

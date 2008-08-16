@@ -7,4 +7,6 @@ elements:
   - type: Text
     name: test2
     label: Test
+    constraints:
+      Required
     
