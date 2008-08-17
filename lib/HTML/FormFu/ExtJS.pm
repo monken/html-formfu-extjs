@@ -46,10 +46,18 @@ Returns a full ExtJS form panel. Usually you'll use this like this (L<TT|Templat
 
   var form = [% form.render %];
 
-C<form> is now a JavaScript object of type C<Ext.FormPanel>. You might want to put some handlers on the button so they will
+C<form> is now a JavaScript object of type C<Ext.FormPanel>. You might want to put a handler on the button so they will
 trigger a function when clicked.
 
   Ext.getCmp("id-of-your-button").setHandler(function() { alert('clicked') } );
+
+Or you can add the handler directly to your element:
+
+  - type: Button
+    value: Handler
+    attrs:
+      handler: function() { alert("click") }
+
 
 =cut
 
@@ -303,7 +311,7 @@ sub _validation_response {
 }
 1;
 
-=head1 KNOWN PROBLEMS
+=head1 CAVEATS
 
 =head2 L<Multi|HTML::FormFu::ExtJS::Element::Multi>
 
@@ -322,13 +330,37 @@ are therefore selectable.
 With ExtJS 2.2 comes an option of the form panel which allows file uploads. Make sure you set
 C<fileUpload> at the form panel to C<true>.
 
+See L<http://extjs.com/deploy/dev/docs/?class=Ext.form.BasicForm> / fileUpload.
+
 =head2 L<Buttons|HTML::FormFu::ExtJS::Element::Button>
 
 Buttons cannot be placed in-line as ExtJS expects them to be in a different attribute. A
 button next to a text box is therefore (not yet) possible. Buttons are always rendered at
 the bottom of a form panel.
 
-See L<http://extjs.com/deploy/dev/docs/?class=Ext.form.BasicForm> / fileUpload.
+=head2 Comments
+
+There is no support for comments yet. A work-around is to create a 
+L<Multi|HTML::FormFu::ExtJS::Element::Multi> element, add the
+element you want to comment in the first column and the comment as a 
+L<Src|HTML::FormFu::ExtJS::Element::Src> element in the
+second column.
+
+=head2 Block
+
+Each element in a C<Block> element is rendered normally. The C<tag> config option has no
+influence. If the C<Block> element contains a C<content> it is rendered like 
+a L<Src|HTML::FormFu::ExtJS::Element::Src> element.
+
+=head1 TODO
+
+=over
+
+=item Write a Catalyst example application with validation, data grids and DBIC (sqlite).
+
+=item L<HTML::FormFu::ExtJS::Grid>
+
+=back
 
 =head1 SEE ALSO
 

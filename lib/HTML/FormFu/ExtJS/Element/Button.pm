@@ -9,7 +9,8 @@ sub render {
 	if ( $attrs{handler} ) { 
 		my $handler = $attrs{handler};
 		$attrs{handler} = \$handler; }
-	return { text => scalar $self->value, %attrs };
+	return { 
+		id => scalar $self->id, name => scalar $self->name, text => scalar $self->value, %attrs };
 }
 1;
 
