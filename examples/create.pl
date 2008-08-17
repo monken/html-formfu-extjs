@@ -18,7 +18,7 @@ croak "Couldn't find directory 'forms'. Run as 'perl -Ilib examples/create.pl'" 
 my @forms;
 
 sub wanted {
-	push(@forms, $_) if ($_ =~ /\.yml/);
+	push(@forms, $_) if ($_ =~ /\.yml$/);
 }
 
 find(\&wanted, "examples/forms");
@@ -37,7 +37,7 @@ for(@forms) {
 	$form = new HTML::FormFu::ExtJS;
 	$form->load_config_file("examples/forms/".$title.".yml");
 	open(FILE, ">examples/html/".$title."-extjs.html");
-	print FILE render_extjs(form => $title, items => $form->render_items);
+	print FILE render_extjs(form => $title, html => $form->render(title => "HTML::FormFu::ExtJS - $title", frame => \1, width => 800));
 	close(FILE);
 	print "done".$/;
 }

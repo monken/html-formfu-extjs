@@ -38,3 +38,29 @@ sub render {
 	return { layout => "column", items => $data };
 }
 1;
+
+
+=head1 NAME
+
+HTML::FormFu::ExtJS::Element::SimpleTable - Simple table layout
+
+=head1 DESCRIPTION
+
+This element renders a simple table using ExtJS column layout. There is no
+way to influence the width etc. of each column. They get distributed equally.
+
+To create layouts with individual width and styles see L<HTML::FormFu::ExtJS::Element::Multi>.
+
+=head1 SEE ALSO
+
+L<HTML::FormFu::Element::Multi>
+
+=head1 COPYRIGHT & LICENSE
+
+Copyright 2008 Moritz Onken, all rights reserved.
+
+This program is free software; you can redistribute it and/or modify it
+under the same terms as Perl itself.
+
+
+=cut

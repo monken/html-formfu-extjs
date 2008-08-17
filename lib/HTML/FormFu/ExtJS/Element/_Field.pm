@@ -8,8 +8,8 @@ sub render {
 		fieldLabel => $self->label,
 		hideLabel  => $self->label ? \0 : \1,
 		id         => scalar $self->id,
-		name       => $self->nested_name,
-		value => $self->default,
+		$self->nested_name ? (name => $self->nested_name) : (),
+		$self->default ? (value => $self->default) : (),
 		$parent->_get_attributes($self)
 	};
 }

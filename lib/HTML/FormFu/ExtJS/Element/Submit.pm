@@ -1,6 +1,6 @@
 package HTML::FormFu::ExtJS::Element::Submit;
 
-use base "HTML::FormFu::ExtJS::Element::_Field";
+use base "HTML::FormFu::ExtJS::Element::Button"; 
 
 use strict;
 use warnings;
@@ -9,7 +9,7 @@ sub render {
 	my $class = shift;
 	my $self = shift;
 	my $super = $class->SUPER::render($self);
-	return {  };
+	return { %{$super}, text => scalar $self->value, type => "submit" };
 	
 	
 }
@@ -18,11 +18,10 @@ sub render {
 
 =head1 NAME
 
-HTML::FormFu::ExtJS::Element::Image - Image element
+HTML::FormFu::ExtJS::Element::Submit - Submit button
 
 =head1 DESCRIPTION
 
-Insert an image specified in C<src>.
 
 =head1 SEE ALSO
 

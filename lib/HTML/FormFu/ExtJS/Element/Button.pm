@@ -1,28 +1,24 @@
 package HTML::FormFu::ExtJS::Element::Button;
-
-use base "HTML::FormFu::ExtJS::Element::_Field";
-
 use strict;
 use warnings;
 
 sub render {
 	my $class = shift;
-	my $self = shift;
-	my $super = $class->SUPER::render($self);
-	return {  };
-	
-	
+	my $self  = shift;
+	my %attrs = $self->form->_get_attributes($self);
+	if ( $attrs{handler} ) { 
+		my $handler = $attrs{handler};
+		$attrs{handler} = \$handler; }
+	return { text => scalar $self->value, %attrs };
 }
-
 1;
 
 =head1 NAME
 
-HTML::FormFu::ExtJS::Element::Image - Image element
+HTML::FormFu::ExtJS::Element::Button - Button
 
 =head1 DESCRIPTION
 
-Insert an image specified in C<src>.
 
 =head1 SEE ALSO
 

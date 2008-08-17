@@ -116,3 +116,4 @@ elements:
     content: <i>some</i> <b>markup</b>
   - type: Submit
     name: submit
+    value: Submit
