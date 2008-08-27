@@ -4,6 +4,7 @@ use base "HTML::FormFu::ExtJS::Element::Text";
 
 use strict;
 use warnings;
+use utf8;
 
 sub render {
 	my $class = shift;

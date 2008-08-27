@@ -1,5 +1,9 @@
 package HTML::FormFu::ExtJS::Element::_Field;
 
+use strict;
+use warnings;
+use utf8;
+
 sub render {
 	my $class  = shift;
 	my $self   = shift;
@@ -13,4 +17,11 @@ sub render {
 		$parent->_get_attributes($self)
 	};
 }
+
+sub record {
+	my $class = shift;
+	my $self = shift;
+	return {name => $self->name, type => "string"};
+}
+
 1;

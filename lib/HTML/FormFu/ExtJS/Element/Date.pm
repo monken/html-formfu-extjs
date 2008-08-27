@@ -2,6 +2,10 @@ package HTML::FormFu::ExtJS::Element::Date;
 
 use base "HTML::FormFu::ExtJS::Element::_Field";
 
+use strict;
+use warnings;
+use utf8;
+
 sub render {
 	my $class = shift;
 	my $self = shift;
@@ -15,19 +19,26 @@ sub render {
 	
 }
 
+sub record {
+	my $class = shift;
+	my $self = shift;
+	my $super = $class->SUPER::record($self);
+	return {%{$super}, type => "date", dateFormat => 'Y-m-d'}
+}
+
 1;
 
 =head1 NAME
 
-HTML::FormFu::ExtJS::Element::Text - Text element
+HTML::FormFu::ExtJS::Element::Date - Date element
 
 =head1 DESCRIPTION
 
-Simple text element.
+Du not put inside a Multi block as it is itself a multi block.
 
 =head1 SEE ALSO
 
-L<HTML::FormFu::Element::Text>
+L<HTML::FormFu::Element::Date>
 
 =head1 COPYRIGHT & LICENSE
 

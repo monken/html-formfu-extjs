@@ -8,7 +8,7 @@ use utf8;
 use JavaScript::Dumper;
 use Tie::Hash::Indexed;
 use Data::Dumper;
-our $VERSION = '0.00001';
+our $VERSION = '0.01';
 $VERSION = eval $VERSION;    # see L<perlmodstyle>
 use HTML::FormFu::Util qw/require_class/;
 
@@ -34,7 +34,7 @@ This module requires ExtJS 2.2 or greater. Most of the elements work with ExtJS 
 
 =head1 EXAMPLES
 
-Check out the examples in C<examples/html>.
+Check out the examples in C<examples/html> (or try L<http://search.cpan.org/src/PERLER/HTML-FormFu-ExtJS-0.01/examples/html>).
 
 =head1 METHODS
 
@@ -63,13 +63,18 @@ Or you can add the handler directly to your element:
 
 sub render {
 	my $self = shift;
-	return "new Ext.FormPanel(".js_dumper($self->_render(@_)).");";
+	return "new Ext.FormPanel(" . js_dumper( $self->_render(@_) ) . ");";
 }
 
 sub _render {
-	my $self = shift;
+	my $self  = shift;
 	my %param = @_;
-	return {items => $self->_render_items, buttons => $self->_render_buttons, %param};
+	return {
+		$self->action ? ( url => $self->action ) : (),
+		items   => $self->_render_items,
+		buttons => $self->_render_buttons,
+		%param
+	};
 }
 
 =head2 render_items
@@ -101,8 +106,7 @@ sub _render_items {
 }
 
 sub render_items {
-	my $self = shift;
-	return js_dumper( $self->_render_items );
+	return js_dumper( shift->_render_items );
 }
 
 =head2 render_buttons
@@ -229,9 +233,9 @@ sub _get_attributes {
 	foreach my $attr ( "attrs_xml", "attrs" ) {
 		my @keys = keys %{ $source->$attr };
 		for (@keys) {
-			$obj->{$_} = ref( $source->$attr->{$_} ) eq "HTML::FormFu::Literal"
-			  ?
-			  "" . $source->$attr->{$_}
+			$obj->{$_} =
+			  ref( $source->$attr->{$_} ) eq "HTML::FormFu::Literal"
+			  ? "" . $source->$attr->{$_}
 			  : $source->$attr->{$_};
 		}
 	}
@@ -280,6 +284,7 @@ Examples:
 Acts like L</validation_response> but returns a perl object instead.
 
 =cut
+
 *ext_validation = \&_validation_response;
 
 sub validation_response {

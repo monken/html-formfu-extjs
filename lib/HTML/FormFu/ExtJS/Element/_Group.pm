@@ -2,6 +2,10 @@ package HTML::FormFu::ExtJS::Element::_Group;
 
 use base "HTML::FormFu::ExtJS::Element::_Field";
 
+use strict;
+use warnings;
+use utf8;
+
 sub _items {
 	my $class = shift;
 	my $self = shift;
@@ -10,7 +14,7 @@ sub _items {
 	foreach my $option ( @{ $self->_options } ) {
 
 		#push( @{$data}, [ $option->{value}, $option->{label} ] );
-		if ( my @items = @{ $option->{group} } ) {
+		if ( $option->{group} && (my @items = @{ $option->{group} }) ) {
 			my $subgroup = {
 				%{$option->{attributes}},
 				items => [{
@@ -18,7 +22,7 @@ sub _items {
 				text   => $option->{label},
 				cls    => 'x-form-check-group-label',
 				anchor => '-15',
-				%{$option->{attributes}->{label}}
+				$option->{attributes}->{label} ? %{$option->{attributes}->{label}} : ()
 				}
 			]};
 			foreach my $item ( @items ) {

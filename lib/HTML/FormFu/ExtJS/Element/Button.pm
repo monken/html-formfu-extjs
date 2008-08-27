@@ -2,6 +2,10 @@ package HTML::FormFu::ExtJS::Element::Button;
 use strict;
 use warnings;
 
+use strict;
+use warnings;
+use utf8;
+
 sub render {
 	my $class = shift;
 	my $self  = shift;

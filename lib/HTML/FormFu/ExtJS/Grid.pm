@@ -2,23 +2,34 @@ package HTML::FormFu::ExtJS::Grid;
 
 use base "HTML::FormFu::ExtJS";
 
+use JavaScript::Dumper;
+
+use utf8;
+
 use strict;
 use warnings;
 
 
+use HTML::FormFu::Util qw/require_class/;
 
-sub ext_data_reader {
+sub record {
+	return "Ext.data.Record.create(".js_dumper(shift->_record(@_)).");";
+}
+
+sub _record {
 	my $form = shift;
 	my @add  = @_;
 	my $data;
-	for ( @{ $form->ext_columns() } ) {
-		push( @{$data}, { name => $_->name } )
-		  if ( $_->can("name") && $_->name );
+	for my $element ( @{ $form->ext_columns() } ) {
+		my $class = "HTML::FormFu::ExtJS::Element::" . $element->type;
+		require_class($class);
+		push( @{$data}, $class->record($element) ) if($class->can("record"));
 	}
+	
 	for (@add) {
-		push( @{$data}, { name => $_ } );
+		push( @{$data}, $_ );
 	}
-	return js_dumper($data);
+	return $data;
 }
 
 sub ext_grid_data {

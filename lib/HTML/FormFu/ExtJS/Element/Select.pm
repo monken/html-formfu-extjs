@@ -2,6 +2,10 @@ package HTML::FormFu::ExtJS::Element::Select;
 
 use base "HTML::FormFu::ExtJS::Element::_Field";
 
+use strict;
+use warnings;
+use utf8;
+
 use JavaScript::Dumper;
 
 sub render {
@@ -19,7 +23,7 @@ sub render {
 		}
 	}
 	my $string = js_dumper( { fields => [ "value", "text" ], data => $data } );
-	return {
+    return {
 		mode           => "local",
 		editable       => \0,
 		displayField   => "text",
