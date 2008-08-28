@@ -1,0 +1,11 @@
+---
+    elements:
+        - type: Text
+          name: name
+        - type: Select
+          name: sex
+          options:
+              - [0, 'male']
+              - [1, 'female']
+        - type: Text
+          name: cds
