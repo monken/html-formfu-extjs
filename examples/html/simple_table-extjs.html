@@ -11,20 +11,7 @@
 
 Ext.onReady(function(){
 
-    var simple = new Ext.FormPanel({
-        frame:true,
-        title: 'Simple Form',
-        bodyStyle:'padding:5px 5px 0',
-        width: 800,
-
-        items: [{"title":null,"autoHeight":1,"xtype":"fieldset","items":[{"layout":"column","items":[{"layout":"form","columnWidth":"0.5","items":[{"cls":"x-form-check-group-label","anchor":"-15","text":"foo","xtype":"label"},{"value":null,"hideLabel":true,"name":"foo","id":null,"fieldLabel":null,"xtype":"textfield"},{"value":null,"hideLabel":1,"boxLabel":null,"name":"foo","id":null,"fieldLabel":null,"xtype":"radio"}]},{"layout":"form","columnWidth":"0.5","items":[{"cls":"x-form-check-group-label","anchor":"-15","text":"bar","xtype":"label"},{"value":null,"hideLabel":true,"name":"bar","id":null,"fieldLabel":null,"xtype":"textfield"},{"value":null,"hideLabel":1,"boxLabel":null,"name":"bar","id":null,"fieldLabel":null,"xtype":"radio"}]}]}]}],
-
-        buttons: [{
-            text: 'Save'
-        },{
-            text: 'Cancel'
-        }]
-    });
+    var simple = new Ext.FormPanel({"width":800,"frame":true,"title":"HTML::FormFu::ExtJS - simple_table","items":[{"title":null,"autoHeight":1,"xtype":"fieldset","items":[{"layout":"column","items":[{"layout":"form","columnWidth":"0.5","items":[{"cls":"x-form-check-group-label","anchor":"-15","text":"foo","xtype":"label"},{"hideLabel":true,"name":"foo","id":null,"fieldLabel":null,"xtype":"textfield"},{"hideLabel":1,"boxLabel":null,"name":"foo","id":null,"fieldLabel":null,"xtype":"radio"}]},{"layout":"form","columnWidth":"0.5","items":[{"cls":"x-form-check-group-label","anchor":"-15","text":"bar","xtype":"label"},{"hideLabel":true,"name":"bar","id":null,"fieldLabel":null,"xtype":"textfield"},{"hideLabel":1,"boxLabel":null,"name":"bar","id":null,"fieldLabel":null,"xtype":"radio"}]}]},{"html":"Table without header"},{"layout":"column","items":[{"layout":"form","columnWidth":"0.5","items":[{"hideLabel":true,"name":"foo","id":null,"fieldLabel":null,"xtype":"textfield"},{"hideLabel":1,"boxLabel":null,"name":"foo","id":null,"fieldLabel":null,"xtype":"radio"}]},{"layout":"form","columnWidth":"0.5","items":[{"hideLabel":true,"name":"bar","id":null,"fieldLabel":null,"xtype":"textfield"},{"hideLabel":1,"boxLabel":null,"name":"bar","id":null,"fieldLabel":null,"xtype":"radio"}]}]}]}],"buttons":[]});;
 
     simple.render(document.body);
 });
@@ -32,6 +19,9 @@ Ext.onReady(function(){
 
 </head>
 <body>
+
+
+<a href="../forms/simple_table.yml">Form config file</a><br/><br/>
 
 
 

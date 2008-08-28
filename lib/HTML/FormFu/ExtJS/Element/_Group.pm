@@ -11,7 +11,7 @@ sub _items {
 	my $self = shift;
 	
 	my $data = [];
-	foreach my $option ( @{ $self->_options } ) {
+	foreach my $option ( @{ $self->render_data->{options} } ) {
 
 		#push( @{$data}, [ $option->{value}, $option->{label} ] );
 		if ( $option->{group} && (my @items = @{ $option->{group} }) ) {
@@ -43,7 +43,7 @@ sub _items {
 						boxLabel   => $option->{label},
 						name       => $self->name,
 						inputValue => $option->{value},
-						%{$option->{attributes}},
+						%{$option->{attributes}}
 					}
 				);
 		}

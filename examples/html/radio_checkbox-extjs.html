@@ -11,20 +11,7 @@
 
 Ext.onReady(function(){
 
-    var simple = new Ext.FormPanel({
-        frame:true,
-        title: 'Simple Form',
-        bodyStyle:'padding:5px 5px 0',
-        width: 800,
-
-        items: [{"value":null,"hideLabel":1,"boxLabel":"test","name":"foo","id":null,"fieldLabel":"test","xtype":"radio"},{"value":null,"hideLabel":1,"boxLabel":"test3","name":"foo2","id":null,"fieldLabel":"test3","xtype":"checkbox"}],
-
-        buttons: [{
-            text: 'Save'
-        },{
-            text: 'Cancel'
-        }]
-    });
+    var simple = new Ext.FormPanel({"width":800,"frame":true,"title":"HTML::FormFu::ExtJS - radio_checkbox","items":[{"hideLabel":1,"boxLabel":"test","name":"foo","id":null,"fieldLabel":"test","xtype":"radio"},{"hideLabel":1,"boxLabel":"test3","name":"foo2","id":null,"fieldLabel":"test3","xtype":"checkbox"}],"buttons":[]});;
 
     simple.render(document.body);
 });
@@ -32,6 +19,9 @@ Ext.onReady(function(){
 
 </head>
 <body>
+
+
+<a href="../forms/radio_checkbox.yml">Form config file</a><br/><br/>
 
 
 

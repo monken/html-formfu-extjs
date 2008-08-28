@@ -11,20 +11,7 @@
 
 Ext.onReady(function(){
 
-    var simple = new Ext.FormPanel({
-        frame:true,
-        title: 'Simple Form',
-        bodyStyle:'padding:5px 5px 0',
-        width: 800,
-
-        items: [{"":null,"hideLabel":false,"name":"value","id":null,"fieldLabel":"Title","xtype":"textfield"},{"":"rows","40":null,"hideLabel":false,"name":"value","id":null,"fieldLabel":"Write it down","xtype":"textarea","20":"cols"},{"wysiwyg":1,"value":"or as a wysiwyg editor","hideLabel":true,"name":"html","rows":20,"xtype":"htmleditor","cols":40,"id":null,"fieldLabel":null}],
-
-        buttons: [{
-            text: 'Save'
-        },{
-            text: 'Cancel'
-        }]
-    });
+    var simple = new Ext.FormPanel({"width":800,"frame":true,"title":"HTML::FormFu::ExtJS - textarea","items":[{"hideLabel":false,"id":null,"fieldLabel":"Title","xtype":"textfield"},{"hideLabel":false,"id":null,"fieldLabel":"Write it down","rows":20,"xtype":"textarea","cols":40},{"wysiwyg":1,"value":"or as a wysiwyg editor","hideLabel":true,"name":"html","rows":20,"xtype":"htmleditor","cols":40,"id":null,"fieldLabel":null}],"buttons":[]});;
 
     simple.render(document.body);
 });
@@ -32,6 +19,9 @@ Ext.onReady(function(){
 
 </head>
 <body>
+
+
+<a href="../forms/textarea.yml">Form config file</a><br/><br/>
 
 
 

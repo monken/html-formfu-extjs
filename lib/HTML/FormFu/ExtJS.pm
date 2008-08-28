@@ -262,7 +262,7 @@ Returns the validation response ExtJS expects. If the submitted values have erro
 the error strings are formatted as a JSON string and returned. Send this string
 back to the user if you want ExtJS to mark the invalid fields or to report a success.
 
-If the submission was successful the response contains a C<data> object which contains
+If the submission was successful the response contains a C<data> property which contains
 all submitted values.
 
 Examples:
@@ -357,13 +357,16 @@ Each element in a C<Block> element is rendered normally. The C<tag> config optio
 influence. If the C<Block> element contains a C<content> it is rendered like 
 a L<Src|HTML::FormFu::ExtJS::Element::Src> element.
 
+=head1 SUBVERSION REPOSITORY
+
+Latest development version is avaiable from L<http://html-formfu.googlecode.com/svn/trunk/HTML-FormFu-ExtJS/>.
+
 =head1 TODO
 
 =over
 
 =item Write a Catalyst example application with validation, data grids and DBIC (sqlite).
 
-=item L<HTML::FormFu::ExtJS::Grid>
 
 =back
 

@@ -11,20 +11,7 @@
 
 Ext.onReady(function(){
 
-    var simple = new Ext.FormPanel({
-        frame:true,
-        title: 'Simple Form',
-        bodyStyle:'padding:5px 5px 0',
-        width: 800,
-
-        items: [{"title":null,"autoHeight":1,"xtype":"fieldset","items":[{"value":null,"hideLabel":true,"name":"count","id":null,"fieldLabel":null,"xtype":"hidden"},{"value":null,"hideLabel":true,"name":"rep.foo_0","id":null,"fieldLabel":null,"xtype":"textfield"},{"value":null,"hideLabel":true,"name":"rep.bar_0","id":null,"fieldLabel":null,"xtype":"textfield"}]}],
-
-        buttons: [{
-            text: 'Save'
-        },{
-            text: 'Cancel'
-        }]
-    });
+    var simple = new Ext.FormPanel({"width":800,"frame":true,"title":"HTML::FormFu::ExtJS - repeatable","items":[{"title":null,"autoHeight":1,"xtype":"fieldset","items":[{"hideLabel":true,"name":"count","id":null,"fieldLabel":null,"xtype":"hidden"},{"hideLabel":true,"name":"rep.foo_0","id":null,"fieldLabel":null,"xtype":"textfield"},{"hideLabel":true,"name":"rep.bar_0","id":null,"fieldLabel":null,"xtype":"textfield"}]}],"buttons":[]});;
 
     simple.render(document.body);
 });
@@ -32,6 +19,9 @@ Ext.onReady(function(){
 
 </head>
 <body>
+
+
+<a href="../forms/repeatable.yml">Form config file</a><br/><br/>
 
 
 

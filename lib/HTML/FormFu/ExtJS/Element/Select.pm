@@ -14,7 +14,7 @@ sub render {
 	my $super = $class->SUPER::render($self);
 
 	my $data;
-	foreach my $option ( @{ $self->_options } ) {
+	foreach my $option ( @{ $self->render_data->{options} } ) {
 		push( @{$data}, [ $option->{value}, $option->{label} ] );
 		if($option->{group} && (my @groups = @{$option->{group}})) {
 			foreach my $item (@groups) {

@@ -11,20 +11,7 @@
 
 Ext.onReady(function(){
 
-    var simple = new Ext.FormPanel({
-        frame:true,
-        title: 'Simple Form',
-        bodyStyle:'padding:5px 5px 0',
-        width: 800,
-
-        items: [{"value":null,"hideLabel":true,"name":"h1","id":null,"fieldLabel":null,"xtype":"hidden"},{"value":null,"hideLabel":false,"name":"t1","id":null,"fieldLabel":"a Text element","xtype":"textfield"},{"html":"<hr>"},{"value":null,"hideLabel":false,"name":"t2","id":null,"fieldLabel":"^ This is a Hr","xtype":"textfield"}],
-
-        buttons: [{
-            text: 'Save'
-        },{
-            text: 'Cancel'
-        }]
-    });
+    var simple = new Ext.FormPanel({"width":800,"frame":true,"title":"HTML::FormFu::ExtJS - text_hr","items":[{"hideLabel":true,"name":"h1","id":null,"fieldLabel":null,"xtype":"hidden"},{"hideLabel":false,"name":"t1","id":null,"fieldLabel":"a Text element","xtype":"textfield"},{"html":"<hr>"},{"hideLabel":false,"name":"t2","id":null,"fieldLabel":"^ This is a Hr","xtype":"textfield"}],"buttons":[]});;
 
     simple.render(document.body);
 });
@@ -32,6 +19,9 @@ Ext.onReady(function(){
 
 </head>
 <body>
+
+
+<a href="../forms/text_hr.yml">Form config file</a><br/><br/>
 
 
 

@@ -23,7 +23,7 @@ sub wanted {
 
 find(\&wanted, "examples/forms");
 
-find(sub { unlink }, "examples/html");
+find(sub { unlink if($_ =~ /\.html$/) }, "examples/html");
 
 for(@forms) {
 	my $title = $_;
