@@ -1,5 +1,6 @@
 ---
-
+attrs:
+  standardSubmit: 1
 elements:
   - type: Text
     name: test

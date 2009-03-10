@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>select</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="../ext/resources/css/ext-all.css"/>
+    <script type="text/javascript" src="../ext/adapter/ext/ext-base.js"></script>
+    <script type="text/javascript" src="../ext/ext-all.js"></script>
+<script type="text/Javascript">
+
+Ext.onReady(function(){
+
+    var simple = new Ext.FormPanel({"width":800,"action":"","frame":true,"title":"HTML::FormFu::ExtJS - select","method":"post","items":[{"title":null,"autoHeight":1,"xtype":"fieldset","items":[{"store":new Ext.data.SimpleStore({"fields":["value","text"],"data":[["","opt1"],[1,"one"],[2,"two"],[3,"non-optgroup"],["","opt2"],[4,"four"],[5,"five"]]}),"mode":"local","forceSelection":true,"hideLabel":false,"name":"select","triggerAction":"all","xtype":"combo","displayField":"text","autoWidth":false,"hiddenName":"select","editable":false,"id":null,"fieldLabel":"a Select with optgroups","valueField":"value"},{"store":new Ext.data.SimpleStore({"fields":["value","text"],"data":[["",""],["yes","Yes"],["no","No"]]}),"hideLabel":false,"forceSelection":true,"mode":"local","name":"combo","triggerAction":"all","xtype":"combo","autoWidth":false,"displayField":"text","hiddenName":"combo","editable":true,"fieldLabel":"a ComboBox with optgroups","id":null,"valueField":"value"}]}],"buttons":[]});;
+
+    simple.render(document.body);
+});
+</script>
+
+</head>
+<body>
+
+
+<a href="../forms/select.yml">Form config file</a><br/><br/>
+
+
+
+</body>
+</html>
+

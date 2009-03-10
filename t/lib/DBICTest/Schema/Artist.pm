@@ -34,7 +34,7 @@ __PACKAGE__->mk_classdata('field_name_for', {
 });
 
 __PACKAGE__->has_many(
-    cds => 'DBICTest::Schema::CD', undef,
+    _cds => 'DBICTest::Schema::CD', undef,
     { order_by => 'year' },
 );
 __PACKAGE__->has_many(
@@ -58,6 +58,10 @@ sub sqlt_deploy_hook {
     $sqlt_table->add_index( name => 'artist_name', fields => ['name'] )
       or die $sqlt_table->error;
   }
+}
+
+sub cds {
+	return shift->_cds->count;
 }
 
 1;

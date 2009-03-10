@@ -11,7 +11,7 @@
 
 Ext.onReady(function(){
 
-    var simple = new Ext.FormPanel({"width":800,"frame":true,"title":"HTML::FormFu::ExtJS - text_hr","items":[{"hideLabel":true,"name":"h1","id":null,"fieldLabel":null,"xtype":"hidden"},{"hideLabel":false,"name":"t1","id":null,"fieldLabel":"a Text element","xtype":"textfield"},{"html":"<hr>"},{"hideLabel":false,"name":"t2","id":null,"fieldLabel":"^ This is a Hr","xtype":"textfield"}],"buttons":[]});;
+    var simple = new Ext.FormPanel({"width":800,"frame":true,"action":"","title":"HTML::FormFu::ExtJS - text_hr","id":"form","method":"post","items":[{"hideLabel":true,"name":"h1","id":null,"fieldLabel":null,"xtype":"hidden"},{"hideLabel":false,"name":"t1","id":null,"fieldLabel":"a Text element","xtype":"textfield"},{"html":"<hr>"},{"hideLabel":false,"name":"t2","id":null,"fieldLabel":"^ This is a Hr","xtype":"textfield"}],"buttons":[]});;
 
     simple.render(document.body);
 });

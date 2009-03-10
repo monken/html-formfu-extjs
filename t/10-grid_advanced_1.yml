@@ -4,7 +4,9 @@
           name: name
         - type: Select
           name: sex
+          empty_first: 1
           options:
+              - label: ''
               - [0, 'male']
               - [1, 'female']
         - type: Text

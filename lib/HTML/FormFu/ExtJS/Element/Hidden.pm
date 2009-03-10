@@ -16,4 +16,11 @@ sub render {
 	
 }
 
+sub column_model {
+	my $class = shift;
+	my $self = shift;
+	my $super = $class->SUPER::column_model($self);
+	return {%{$super}, hidden => \1 };
+}
+
 1;

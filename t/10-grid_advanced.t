@@ -6,36 +6,52 @@ use warnings;
 
 use lib qw(t/lib);
 
+BEGIN {
+    eval "use DBIx::Class; use DBD::SQLite;";
+    plan $@
+      ? ( skip_all => 'needs DBIx::Class and DBD::SQLite for testing' )
+      : ( tests => 3 );
+}
+
 use DBICTest;
-use Data::Dumper;
 
 my $schema = DBICTest->init_schema();
 
-BEGIN {
-	eval "use DBIx::Class";
-    eval "use DBD::SQLite";
-    plan $@
-        ? ( skip_all => 'needs DBIx::Class and DBD::SQLite for testing' )
-        : ( tests => 3 );
-}
 
-$Data::Dumper::Indent = 0;
+my $result = {
+    'metaData' => {
+        'fields' => [
+            { 'name' => 'name', 'type' => 'string', mapping => 'name' },
+            { 'name' => 'sex-value',  'type' => 'string', mapping => 'sex.value', id => 'sex-value' },
+            { 'name' => 'sex-label',  'type' => 'string', mapping => 'sex.label', id => 'sex-label' },
+            { 'name' => 'cds',  'type' => 'string', mapping => 'cds' }
+        ],
+        'totalProperty' => 'results',
+        'root'          => 'rows'
+    },
+    'rows' => [
+        { 'cds' => 3, 'name' => 'Caterwauler McCrae', sex => {label => 'male', value => 0 }},
+        { 'cds' => 1, 'name' => 'Random Boy Band',    sex => {label => 'female', value => 1 } },
+        { 'cds' => 1, 'name' => 'We Are Goth',        sex => {label => 'male', value => 0 } }
+    ],
+    'results' => 3
+};
 
-my $result = {'metaData' => {'fields' => [{'name' => 'name','type' => 'string'},{'name' => 'sex','type' => 'string'},{'name' => 'cds','type' => 'string'}],'totalProperty' => 'results','root' => 'rows'},'rows' => [{'cds' => 3,'name' => 'Caterwauler McCrae','sex' => 'male'},{'cds' => 1,'name' => 'Random Boy Band','sex' => 'female'},{'cds' => 1,'name' => 'We Are Goth','sex' => 'male'}],'results' => 3};
+my $rs =
+  $schema->resultset("Artist")->search( undef, { order_by => 'name asc' } );
 
-my $rs = $schema->resultset("Artist")->search(undef, {order_by => 'name asc'});
-
-my $form = new HTML::FormFu::ExtJS::Grid;
+my $form = new HTML::FormFu::ExtJS;
 $form->load_config_file('t/10-grid_advanced_1.yml');
-my $data = $form->grid_data($rs);
-is_deeply($data, $result);
+my $data = $form->grid_data( [ $rs->all ] );
+is_deeply( $data, $result );
 
-$form = new HTML::FormFu::ExtJS::Grid;
+
+$form = new HTML::FormFu::ExtJS;
 $form->load_config_file('t/10-grid_advanced_2.yml');
-my $data = $form->grid_data($rs);
-is_deeply($data, $result);
+$data = $form->grid_data( [ $rs->all ] );
+is_deeply( $data, $result );
 
-$form = new HTML::FormFu::ExtJS::Grid;
+$form = new HTML::FormFu::ExtJS;
 $form->load_config_file('t/10-grid_advanced_3.yml');
-my $data = $form->grid_data($rs);
-is_deeply($data, $result);
+$data = $form->grid_data( [ $rs->all ] );
+is_deeply( $data, $result );

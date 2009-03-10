@@ -1,10 +1,35 @@
 Revision history for Perl extension HTML::FormFu::ExtJS.
 
-0.02  Sat Aug  28 2008
+0.06008
+    - deprecated HTML::FormFu::ExtJS::Grid
+    - factored out a lot of code to HTML::FormFu::Model::HashRef
+    - Pushed version to the current HTML::FormFu version minus 0.03 :-)
+    - added support for ComboBox and DateTime
+    - added a helper for ExtJS.grid.ColumnModel (->column_model)
+    
+    !!!IMPORTANT!!!
+    - there have been some changes to grid_data and companions
+      some of them might change the json output. Please have
+      a look at the documentation to see what changed!
+0.06 
+    - grid_data: Checkboxes are set to true if checked
+    - grid_data: using blessed objects: fixed error when method not existing
+
+0.04 Sep 04 2008
+	- finally finally fixed deps for tests
+
+0.04 Sep 04 2008
+	- finally fixed deps for tests
+	
+0.03 Sep 04 2008
+	- fixed deps for tests
+
+0.02  Sat Sep 03 2008
 	- removed HashRefInflator dependency
 	- Grid added and documented
 	- more tests
 	- replaced _options with render_data->{options}
+	- validation_response returns a perl object instead of a JSON string
 	
 0.01  Sat Aug  27 2008 rev 1145
 	- inital release

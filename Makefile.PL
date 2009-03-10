@@ -9,13 +9,14 @@ all_from 'lib/HTML/FormFu/ExtJS.pm';
 # version 5.567 that ships with perl 5.82 is no good
 requires 'Exporter' => '5.57';
 
-requires 'HTML::FormFu' => "0.03";
+requires 'HTML::FormFu' => "0.03008";
 requires 'Scalar::Util' => 0;
 requires 'Carp' => 0;
 requires 'JavaScript::Dumper' => '0.008';
 requires 'Tie::Hash::Indexed' => 0;
 requires 'Data::Dumper' => 0;
 requires 'Hash::Merge::Simple' => '0.03';
+requires 'Hash::Flatten';
 tests 't/*.t';
 
 no_index directory => 'examples';

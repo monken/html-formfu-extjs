@@ -8,7 +8,10 @@ my $form = new HTML::FormFu::ExtJS;
 $form->load_config_file("t/01-text.yml");
 
 is_deeply( $form->_render, {
+	action => '',
+	standardSubmit => 1,
           'buttons' => [],
+		  'method' => 'post',
           'items' => [
                      {
                        'hideLabel' => \1,

@@ -10,4 +10,8 @@ elements:
   - type: Date
     name: date
     label: Date
+  - type: DateTime
+    name: datetime
+    label: Date & Time
+    default_natural: today
     

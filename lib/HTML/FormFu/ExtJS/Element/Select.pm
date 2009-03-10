@@ -1,6 +1,6 @@
 package HTML::FormFu::ExtJS::Element::Select;
 
-use base "HTML::FormFu::ExtJS::Element::_Field";
+use base "HTML::FormFu::ExtJS::Element::_Group";
 
 use strict;
 use warnings;
@@ -38,6 +38,8 @@ sub render {
 	};
 
 }
+
+
 
 1;
 

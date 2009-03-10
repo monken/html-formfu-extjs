@@ -21,5 +21,10 @@ __PACKAGE__->has_many(
     cd_to_producer => 'DBICTest::Schema::CD_to_Producer' => 'producer'
 );
 
-__PACKAGE__->many_to_many( cds => cd_to_producer => 'cd' );
+__PACKAGE__->many_to_many( _cds => cd_to_producer => 'cd' );
+
+
+sub cds {
+	return shift->_cds->count;
+}
 1;

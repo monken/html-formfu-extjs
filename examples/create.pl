@@ -31,6 +31,7 @@ for(@forms) {
 	print "Creating $title... ";
 	my $form = new HTML::FormFu;
 	$form->load_config_file("examples/forms/".$title.".yml");
+	$form->process;
 	open(FILE, ">examples/html/".$title."-html.html");
 	print FILE render_html(form => $title, html => $form->render);
 	close(FILE);

@@ -2,7 +2,7 @@
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>repeatable</title>
+<title>block</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" type="text/css" href="../ext/resources/css/ext-all.css"/>
     <script type="text/javascript" src="../ext/adapter/ext/ext-base.js"></script>
@@ -11,7 +11,7 @@
 
 Ext.onReady(function(){
 
-    var simple = new Ext.FormPanel({"width":800,"action":"","frame":true,"title":"HTML::FormFu::ExtJS - repeatable","method":"post","items":[{"title":null,"autoHeight":1,"xtype":"fieldset","items":[{"hideLabel":true,"name":"count","id":null,"fieldLabel":null,"xtype":"hidden"},{"hideLabel":true,"name":"rep.foo_0","id":null,"fieldLabel":null,"xtype":"textfield"},{"hideLabel":true,"name":"rep.bar_0","id":null,"fieldLabel":null,"xtype":"textfield"}]}],"buttons":[]});;
+    var simple = new Ext.FormPanel({"width":800,"action":"","frame":true,"title":"HTML::FormFu::ExtJS - block","method":"post","items":[{"hideLabel":true,"name":"foo","id":null,"fieldLabel":null,"xtype":"textfield"},{"html":"Whatever","xtype":"label"}],"buttons":[]});;
 
     simple.render(document.body);
 });
@@ -21,7 +21,7 @@ Ext.onReady(function(){
 <body>
 
 
-<a href="../forms/repeatable.yml">Form config file</a><br/><br/>
+<a href="../forms/block.yml">Form config file</a><br/><br/>
 
 
 

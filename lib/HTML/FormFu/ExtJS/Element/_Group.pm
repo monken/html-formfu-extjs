@@ -52,4 +52,28 @@ sub _items {
 	return $data;
 }
 
+sub column_model {
+	my $class = shift;
+	my $self = shift;
+	my $super = $class->SUPER::column_model($self);
+	my $name = $self->nested_name;
+	$name =~ s/\./-/g;
+	
+	return ({%{$super}, id => $name."-value", dataIndex => $name.'-value', hidden => \1 },
+			{%{$super}, id => $name."-label", dataIndex => $name.'-label' });
+	
+}
+
+sub record {
+	my $class = shift;
+	my $self = shift;
+	my $super = $class->SUPER::record($self);
+	my $name = $self->nested_name;
+	$name =~ s/\./-/g;
+	return ({%{$super}, name => $name."-value", id => $name."-value", mapping => $self->nested_name.'.value' },
+			{%{$super}, name => $name."-label", id => $name."-label", mapping => $self->nested_name.'.label' });
+	
+}
+
+
 1;
