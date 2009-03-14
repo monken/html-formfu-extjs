@@ -7,9 +7,9 @@ use warnings;
 use lib qw(t/lib);
 
 BEGIN {
-    eval "use DBIx::Class; use DBD::SQLite;";
+	eval "use DBIx::Class; use DBD::SQLite; use HTML::FormFu::Model::DBIC;";
     plan $@
-      ? ( skip_all => 'needs DBIx::Class and DBD::SQLite for testing' )
+        ? ( skip_all => 'needs DBIx::Class, HTML::FormFu::Model::DBIC and DBD::SQLite for testing' )
       : ( tests => 3 );
 }
 
@@ -22,8 +22,8 @@ my $result = {
     'metaData' => {
         'fields' => [
             { 'name' => 'name', 'type' => 'string', mapping => 'name' },
-            { 'name' => 'sex-value',  'type' => 'string', mapping => 'sex.value', id => 'sex-value' },
-            { 'name' => 'sex-label',  'type' => 'string', mapping => 'sex.label', id => 'sex-label' },
+            { 'name' => 'sexValue',  'type' => 'string', mapping => 'sex.value' },
+            { 'name' => 'sex',  'type' => 'string', mapping => 'sex.label' },
             { 'name' => 'cds',  'type' => 'string', mapping => 'cds' }
         ],
         'totalProperty' => 'results',

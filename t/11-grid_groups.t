@@ -1,17 +1,16 @@
 use Test::More;
 
-use HTML::FormFu::ExtJS::Grid;
+use HTML::FormFu::ExtJS;
 use strict;
 use warnings;
 
 use lib qw(t/lib);
 
 BEGIN {
-    eval "use DBIx::Class; use DBD::SQLite; use HTML::FormFu::Model::DBIC";
+	eval "use DBIx::Class; use DBD::SQLite; use HTML::FormFu::Model::DBIC;";
     plan $@
-      ? ( skip_all =>
-'needs DBIx::Class, HTML::FormFu::Model::DBIC and DBD::SQLite for testing'
-      )
+        ? ( skip_all => 'needs DBIx::Class, HTML::FormFu::Model::DBIC and DBD::SQLite for testing' )
+      
       : ( tests => 1 );
 }
 
@@ -25,9 +24,10 @@ $Data::Dumper::Indent = 0;
 my $result = {
     'metaData' => {
         'fields' => [
-            { 'name' => 'name',       'type' => 'string' },
-            { 'name' => 'producerid', 'type' => 'string' },
-            { 'name' => 'cds',        'type' => 'string' }
+            { 'name' => 'name',       'type' => 'string', mapping => "name" },
+            { 'name' => 'producerid', 'type' => 'string' , mapping => 'producerid' },
+            { 'name' => 'cdsValue', 'type' => 'string' , mapping => 'cds.value' },
+            { 'name' => 'cds', 'type' => 'string' , mapping => 'cds.label' }
         ],
         'totalProperty' => 'results',
         'root'          => 'rows'

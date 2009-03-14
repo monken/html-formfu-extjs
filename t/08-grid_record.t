@@ -4,8 +4,8 @@ use HTML::FormFu::ExtJS::Grid;
 use strict;
 use warnings;
 
-my $form = new HTML::FormFu::ExtJS::Grid;
+my $form = new HTML::FormFu::ExtJS;
 $form->load_config_file("t/01-text.yml");
-is_deeply( $form->_record , [{name => "test", type => "string"}, {name => "test2", type => "string"}]);
+is_deeply( $form->_record , [{name => "test", type => "string", mapping => "test"}, {mapping => "test2", name => "test2", type => "string"}]);
 
 ok($form->render_items);
