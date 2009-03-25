@@ -1,5 +1,7 @@
 Revision history for Perl extension HTML::FormFu::ExtJS.
 
+    - added ExtJS::Panel
+
 0.06008
     - deprecated HTML::FormFu::ExtJS::Grid
     - factored out a lot of code to HTML::FormFu::Model::HashRef
