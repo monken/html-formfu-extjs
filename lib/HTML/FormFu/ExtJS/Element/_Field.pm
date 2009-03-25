@@ -4,6 +4,11 @@ use strict;
 use warnings;
 use utf8;
 
+use HTML::FormFu::Util qw(
+    xml_escape
+);
+
+
 sub render {
 	my $class  = shift;
 	my $self   = shift;
@@ -12,7 +17,7 @@ sub render {
 	map { $value = $_->process($value) } @{$self->get_deflators};
 
 	return {
-		fieldLabel => $self->label,
+		fieldLabel => xml_escape( $self->label ),
 		hideLabel  => $self->label ? \0 : \1,
 		id         => scalar $self->id,
 		$self->nested_name ? (name => $self->nested_name) : (),
