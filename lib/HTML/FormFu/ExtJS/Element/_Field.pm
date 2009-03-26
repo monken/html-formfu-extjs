@@ -19,7 +19,7 @@ sub render {
 	return {
 		fieldLabel => xml_escape( $self->label ),
 		hideLabel  => $self->label ? \0 : \1,
-		id         => scalar $self->id,
+		(scalar $self->id) ? (id => scalar $self->id) : (),
 		$self->nested_name ? (name => $self->nested_name) : (),
 		$self->default ? (value => $value) : (),
 		$parent->_get_attributes($self)
