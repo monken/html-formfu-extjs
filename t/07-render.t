@@ -12,6 +12,7 @@ is_deeply( $form->_render, {
 	standardSubmit => 1,
           'buttons' => [],
 		  'method' => 'post',
+		  'baseParams' => {'x-requested-by' => 'ExtJS'},
           'items' => [
                      {
                        'hideLabel' => \1,
@@ -25,7 +26,6 @@ is_deeply( $form->_render, {
                        'hideLabel' => \0,
                        'name' => 'test2',
                        'fieldLabel' => 'Test',
-                       'id' => undef,
                        'xtype' => 'textfield'
                      }
                    ]

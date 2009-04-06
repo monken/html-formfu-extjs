@@ -28,7 +28,6 @@ my $expected = [
                  'hideLabel' => \0,
                  'name' => 'test2',
                  'fieldLabel' => 'Test',
-                 'id' => undef,
                  'xtype' => 'textfield'
                }
              ]

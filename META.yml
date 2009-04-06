@@ -1,0 +1,31 @@
+---
+abstract: 'Render and validate ExtJS forms using HTML::FormFu'
+author:
+  - 'Moritz Onken, all rights reserved.'
+distribution_type: module
+generated_by: 'Module::Install version 0.77'
+license: perl
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: HTML-FormFu-ExtJS
+no_index:
+  directory:
+    - examples
+    - inc
+    - t
+    - examples
+requires:
+  Carp: 0
+  Data::Dumper: 0
+  Exporter: 5.57
+  HTML::FormFu: 0.04
+  Hash::Flatten: 0
+  Hash::Merge::Simple: 0.03
+  JavaScript::Dumper: 0.008
+  Scalar::Util: 0
+  Tie::Hash::Indexed: 0
+  perl: 5.8.1
+resources:
+  license: http://dev.perl.org/licenses/
+version: 0.03008

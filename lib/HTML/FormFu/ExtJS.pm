@@ -36,7 +36,7 @@ This module requires ExtJS 2.2 or greater. Most of the elements work with ExtJS 
 
 =head1 EXAMPLES
 
-Check out the examples in C<examples/html> (or try L<http://search.cpan.org/src/PERLER/HTML-FormFu-ExtJS-0.01/examples/html>).
+Check out the examples in C<examples/html> (or try L<http://search.cpan.org/src/PERLER/HTML-FormFu-ExtJS-0.07/examples/html>).
 
 =head1 METHODS
 
@@ -44,9 +44,15 @@ A HTML::FormFu::ExtJS object inherits all methods of a L<HTML::FormFu> object. T
 
 =head2 render
 
-Returns a full ExtJS form panel. Usually you'll use this like this (L<TT|Template> example):
+Returns a full ExtJS form panel. Usually you'll use it like this (L<TT|Template> example):
 
   var form = [% form.render %];
+
+You can pass custom attributes to this method which are added to the form config.
+
+  var form = [% form.render(renderTo = 'main') %];
+
+This will add a C<renderTo> attribute to the form config.
 
 C<form> is now a JavaScript object of type C<Ext.FormPanel>. You might want to put a handler on the button so they will
 trigger a function when clicked.
@@ -156,14 +162,23 @@ sub render {
 
 sub _render {
 	my $self  = shift;
-	my %param = @_;
-	my %attrs = $self->_get_attributes($self);
-	return {
+	use Data::Dumper;
+	my %param;
+	if(ref $_[0] eq "HASH") {
+	    %param = %{$_[0]};
+    } else {
+        %param = @_;
+    }
+	my $return = {
 		$self->action ? ( url => $self->action ) : (),
 		items   => $self->_render_items,
 		buttons => $self->_render_buttons,
-		%param, %attrs
+		baseParams => {'x-requested-by' => 'ExtJS'},
+		%param
 	};
+	my %attrs = $self->_get_attributes($self);
+	return { %$return, %attrs };
+    
 }
 
 =head2 render_items

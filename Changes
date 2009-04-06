@@ -1,14 +1,15 @@
 Revision history for Perl extension HTML::FormFu::ExtJS.
 
+0.07
     - added ExtJS::Panel
     - fixed handling of localised attributes
-
-0.06008
     - deprecated HTML::FormFu::ExtJS::Grid
     - factored out a lot of code to HTML::FormFu::Model::HashRef
-    - Pushed version to the current HTML::FormFu version minus 0.03 :-)
     - added support for ComboBox and DateTime
     - added a helper for ExtJS.grid.ColumnModel (->column_model)
+    - added "x-requested-by : ExtJS" as baseParam to every form
+    - #44818 fixed (buttons use 'value' config value for text instead of 'name' like FormFu)
+    - fileUpload: true is set on the form if there is a File field
     
     !!!IMPORTANT!!!
     - there have been some changes to grid_data and companions
@@ -18,7 +19,7 @@ Revision history for Perl extension HTML::FormFu::ExtJS.
     - grid_data: Checkboxes are set to true if checked
     - grid_data: using blessed objects: fixed error when method not existing
 
-0.04 Sep 04 2008
+0.05 Sep 04 2008
 	- finally finally fixed deps for tests
 
 0.04 Sep 04 2008

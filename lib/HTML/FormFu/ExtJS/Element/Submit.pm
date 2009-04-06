@@ -10,7 +10,7 @@ sub render {
 	my $class = shift;
 	my $self = shift;
 	my $super = $class->SUPER::render($self);
-	return { %{$super}, text => scalar $self->value, type => "submit" };
+	return { %{$super}, text => $self->value || $self->name, type => "submit" };
 	
 	
 }

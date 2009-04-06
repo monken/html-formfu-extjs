@@ -8,7 +8,7 @@ my $form = new HTML::FormFu::ExtJS;
 $form->load_config_file("t/01-text.yml");
 is_deeply( $form->_render_items,
 	[ { hideLabel => \1, "fieldLabel" => undef, "name" => "test", labelWidth => 10, id => "test_id", "xtype" => "textfield" },
-	{ hideLabel => \0, "fieldLabel" => "Test", "name" => "test2", id => undef, "xtype" => "textfield" } ] );
+	{ hideLabel => \0, "fieldLabel" => "Test", "name" => "test2", "xtype" => "textfield" } ] );
 is(scalar @{$form->_render_items}, 2);
 
 ok($form->render_items);

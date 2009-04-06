@@ -14,7 +14,7 @@ sub render {
 		my $handler = $attrs{handler};
 		$attrs{handler} = \$handler; }
 	return { 
-		id => scalar $self->id, name => scalar $self->name, text => scalar $self->value, %attrs };
+		id => scalar $self->id, name => scalar $self->name, text => $self->value || $self->name, %attrs };
 }
 1;
 

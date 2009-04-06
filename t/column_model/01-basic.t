@@ -23,12 +23,12 @@ is_deeply( $form->_column_model, [
           {
             'dataIndex' => 'sexValue',
             'hidden' => \1,
-            'id' => 'sexValue',
+            'id' => 'sex-value',
             'header' => 'Sex'
           },
           {
-            'dataIndex' => 'sexLabel',
-            'id' => 'sexLabel',
+            'dataIndex' => 'sex',
+            'id' => 'sex',
             'header' => 'Sex'
           },
           {

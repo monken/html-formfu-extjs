@@ -10,7 +10,8 @@ sub render {
 	my $class = shift;
 	my $self = shift;
 	my $super = $class->SUPER::render($self);
-	return { %{$super}, inputType => "file" };
+	$self->form->attrs_xml->{fileUpload} = \1;
+	return { %{$super}, inputType => "file", value => undef };
 	
 	
 }
