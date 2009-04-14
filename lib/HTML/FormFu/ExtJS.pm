@@ -459,6 +459,7 @@ sub ext_grid_data {
 		
 	
 	foreach my $datum ( @{$data} ) {
+	    $self->model('HashRef')->default_values({});
 		$self->model->default_values($datum);
 		push(@return, $self->model('HashRef')->create);
 	}
