@@ -19,7 +19,7 @@ sub render {
 	return {
         xtype => $self->xtype,
 		$title ? (title => xml_escape( $title )) : (),
-		id    => scalar $self->id,
+		(scalar $self->id) ? (id => scalar $self->id) : (),
         items => $self->form->_render_items( $self ),
 		$parent->_get_attributes( $self )
 	};
