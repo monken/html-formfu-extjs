@@ -206,6 +206,10 @@ sub _render_items {
 		require_class($class);
 		push( @{$output}, $class->render($element) );
 	}
+
+    # remove undef elements
+    $output = [ grep { defined $_ } @{$output} ];
+
 	return $output;
 }
 
@@ -245,6 +249,42 @@ sub _render_buttons {
 	}
 	return $output;
 }
+
+=head2 render_values
+
+C<render_values> returns the values specified in C<$form> as a JSON string.
+
+=head2 _render_values
+
+Acts like L</render_values> but returns a perl object instead.
+
+=cut
+
+sub render_values {
+    my $self = shift;
+    return js_dumper( $self->_render_values );
+}
+
+sub _render_values {
+    my $self   = shift;
+    my $from   = shift || $self;
+    my $output = [];
+    return $output;
+
+
+    foreach my $element ( @{ $from->get_all_elements() } ) {
+        next
+          unless ( $element->type eq "Submit"
+            || $element->type eq "Button"
+            || $element->type eq "ContentButton"
+            || $element->type eq "Reset" );
+        my $class = "HTML::FormFu::ExtJS::Element::" . $element->type;
+        require_class($class);
+        push( @{$output}, $class->render($element) );
+    }
+    return $output;
+}
+
 
 # Altlasten
 sub ext_items {
