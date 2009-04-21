@@ -12,7 +12,7 @@ requires 'Exporter' => '5.57';
 requires 'HTML::FormFu' => "0.04";
 requires 'Scalar::Util' => 0;
 requires 'Carp' => 0;
-requires 'JavaScript::Dumper' => '0.008';
+requires 'JavaScript::Dumper' => '0.011';
 requires 'Tie::Hash::Indexed' => 0;
 requires 'Data::Dumper' => 0;
 requires 'Hash::Merge::Simple' => '0.03';
@@ -20,5 +20,6 @@ requires 'Hash::Flatten';
 
 no_index directory => 'examples';
 
+tests_recursive( 't' );
 
 WriteAll;

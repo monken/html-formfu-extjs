@@ -1,5 +1,3 @@
-.DS_Store
-.project
 Changes
 examples/create.pl
 examples/css/vertically-aligned-ie.css
@@ -245,6 +243,7 @@ examples/forms/multi.yml
 examples/forms/radio_checkbox.yml
 examples/forms/radiogroup.yml
 examples/forms/repeatable.yml
+examples/forms/select.yml
 examples/forms/simple_table.yml
 examples/forms/src.yml
 examples/forms/text_hr.yml
@@ -266,6 +265,8 @@ examples/html/radiogroup-extjs.html
 examples/html/radiogroup-html.html
 examples/html/repeatable-extjs.html
 examples/html/repeatable-html.html
+examples/html/select-extjs.html
+examples/html/select-html.html
 examples/html/simple_table-extjs.html
 examples/html/simple_table-html.html
 examples/html/src-extjs.html
@@ -286,19 +287,25 @@ inc/Module/Install/Makefile.pm
 inc/Module/Install/Metadata.pm
 inc/Module/Install/Win32.pm
 inc/Module/Install/WriteAll.pm
+lib/HTML/FormFu/Element/ExtJS/Panel.pm
 lib/HTML/FormFu/ExtJS.pm
 lib/HTML/FormFu/ExtJS/Element/_DateSelect.pm
 lib/HTML/FormFu/ExtJS/Element/_Field.pm
 lib/HTML/FormFu/ExtJS/Element/_Group.pm
 lib/HTML/FormFu/ExtJS/Element/_Input.pm
+lib/HTML/FormFu/ExtJS/Element/_MultiElement.pm
+lib/HTML/FormFu/ExtJS/Element/_MultiSelect.pm
 lib/HTML/FormFu/ExtJS/Element/_NonBlock.pm
 lib/HTML/FormFu/ExtJS/Element/Blank.pm
 lib/HTML/FormFu/ExtJS/Element/Block.pm
 lib/HTML/FormFu/ExtJS/Element/Button.pm
 lib/HTML/FormFu/ExtJS/Element/Checkbox.pm
 lib/HTML/FormFu/ExtJS/Element/Checkboxgroup.pm
+lib/HTML/FormFu/ExtJS/Element/ComboBox.pm
 lib/HTML/FormFu/ExtJS/Element/ContentButton.pm
 lib/HTML/FormFu/ExtJS/Element/Date.pm
+lib/HTML/FormFu/ExtJS/Element/DateTime.pm
+lib/HTML/FormFu/ExtJS/Element/ExtJS/Panel.pm
 lib/HTML/FormFu/ExtJS/Element/Fieldset.pm
 lib/HTML/FormFu/ExtJS/Element/File.pm
 lib/HTML/FormFu/ExtJS/Element/Hidden.pm
@@ -317,8 +324,6 @@ lib/HTML/FormFu/ExtJS/Element/Submit.pm
 lib/HTML/FormFu/ExtJS/Element/Text.pm
 lib/HTML/FormFu/ExtJS/Element/Textarea.pm
 lib/HTML/FormFu/ExtJS/Grid.pm
-lib/HTML/FormFu/ExtJS/pod2htmd.tmp
-lib/HTML/FormFu/ExtJS/pod2htmi.tmp
 Makefile.PL
 MANIFEST			This list of files
 META.yml
@@ -345,8 +350,13 @@ t/11-grid_groups.t
 t/11-grid_groups.yml
 t/12-validation_data.t
 t/12-validation_data.yml
+t/13-panel.t
+t/13-panel.yml
+t/50-datetime.t
+t/50-datetime.yml
+t/column_model/01-basic.t
+t/column_model/01-basic.yml
 t/HTML-FormFu-ExtJS.t
-t/lib/.DS_Store
 t/lib/DBICTest.pm
 t/lib/DBICTest/Schema.pm
 t/lib/DBICTest/Schema/Artist.pm
@@ -384,5 +394,6 @@ t/lib/DBICTest/Schema/TwoKeys.pm
 t/lib/DBICTest/Schema/TwoKeyTreeLike.pm
 t/lib/DBICTest/Schema/TypedObject.pm
 t/lib/sqlite.sql
-t/t/.DS_Store
+t/render/custom_attributes.t
+t/render/file_upload.t
 t/var/DBIxClass.db

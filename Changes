@@ -1,6 +1,11 @@
 Revision history for Perl extension HTML::FormFu::ExtJS.
 
-0.07
+0.071_01
+
+    - NotAField?
+    - render_values?
+
+0.070
     - added ExtJS::Panel
     - fixed handling of localised attributes
     - deprecated HTML::FormFu::ExtJS::Grid

@@ -10,7 +10,7 @@ use Tie::Hash::Indexed;
 use Hash::Merge::Simple qw(merge);
 use Scalar::Util 'blessed';
 use Data::Dumper;
-our $VERSION = '0.03008';
+our $VERSION = '0.070';
 $VERSION = eval $VERSION;    # see L<perlmodstyle>
 use HTML::FormFu::Util qw/require_class/;
 
@@ -34,9 +34,14 @@ If you want to generate grid data and data records for ExtJS have a look at L<HT
 
 This module requires ExtJS 2.2 or greater. Most of the elements work with ExtJS 2.0 or greater too.
 
+B<This module is fully compatible with ExtJS 3.0.>
+
 =head1 EXAMPLES
 
-Check out the examples in C<examples/html> (or try L<http://search.cpan.org/src/PERLER/HTML-FormFu-ExtJS-0.07/examples/html>).
+Check out the examples in C<examples/html>
+
+=for html <p> or online at [ <a href="http://search.cpan.org/src/PERLER/HTML-FormFu-ExtJS-0.07/examples/html">Examples</a> ]<p>
+
 
 =head1 METHODS
 
@@ -67,7 +72,7 @@ Or you can add the handler directly to your element:
       handler: function() { alert("click") }
 
 
-=head2 grid_data
+=head2 grid_data (experimental)
 
 This methods returns data in a format which is expected by ExtJS as perl object. You will want to serialize it with L<JSON> and send it to the client.
 
@@ -120,13 +125,19 @@ Therefore you can override every item of the perl object by passing a hashref.
 
 This will set the number of results to 99.
 
+B<Notice:>
+
+This method is considered I<experimental>. This is due to the fact that is pretty slow at the moment because
+of all the de- and inflation and accessing DBIC accessors. Future plans include that this module will be ORM
+independant and accepts Hashrefs only. This implies that you use L<DBIx::Class::ResultClass::HashRefInflator>
+or anything similar if you want to use this method.
+
+
 =over
 
 =item C<grid_data> will call all deflators specified in the form config file. 
 
 =item L<Select|HTML::FormFu::ExtJS::Select> elements will not display the acutal value but the label of the option it refers to.
-
-=item If you are passing L<DBIx::Class> objects and the field is a L<has_many|DBIx::Class::Relationship/has_many> or L<many_to_many|DBIx::Class::Relationship/many_to_many> relationship it will call C<count> on that.
 
 =back
 
@@ -409,18 +420,18 @@ back to the user if you want ExtJS to mark the invalid fields or to report a suc
 If the submission was successful the response contains a C<data> property which contains
 all submitted values.
 
-Examples:
+Examples (JSON encoded):
 
-  { "success" => 0,
-    "errors"  => [
-      { "msg" => "This field is required",
-        "id"  => "field" }
+  { "success" : false,
+    "errors"  : [
+      { "msg" : "This field is required",
+        "id"  : "field" }
     ]
   }
 
 
-  { "success" => 1,
-    "data"    => { field: "value" }
+  { "success" : true,
+    "data"    : { field : "value" }
   }
 
 =cut
@@ -508,6 +519,46 @@ sub ext_grid_data {
 	
 }
 
+=head2 column_model
+
+A column model is required to render a grid. It contains all columns which should be rendered inside the grid.
+Those can be hidden or visible. A hidden form element will also result in a hidden column.
+
+A field which has options (like L<HTML::FormFu::Element::Select>) will create two columns.
+
+Example:
+
+  ---
+    default_model: HashRef
+    elements:
+        - type: Radiogroup
+          label: Sex
+          name: sex
+          options:
+              - [0, 'male']
+              - [1, 'female']
+
+This will create the following columns:
+
+        {
+          'dataIndex' : 'sexValue',
+          'hidden'    : true,
+          'id'        : 'sex-value',
+          'header'    : 'Sex'
+        },
+        {
+          'dataIndex' : 'sex',
+          'id'        : 'sex',
+          'header'    : 'Sex'
+        }
+
+The first column is hidden and contains the value of the select box (e. g. C<0> or C<1>). The
+second column contains the label of the value (e. g. C<male> or C<female>) and is visible.
+
+This way you can access both the value and the label of such a field. Notice the values of
+C<dataIndex> and <id> on those columns. Those correspond with the output of L</grid_data>.
+
+=cut
 
 sub column_model {
 	return "new Ext.grid.ColumnModel(" . js_dumper ( shift->_column_model(@_) ) . ");";
@@ -725,7 +776,7 @@ L<HTML::FormFu>, L<JavaScript::Dumper>
 
 =head1 COPYRIGHT & LICENSE
 
-Copyright 2008 Moritz Onken, all rights reserved.
+Copyright 2008-2009 Moritz Onken, all rights reserved.
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.
