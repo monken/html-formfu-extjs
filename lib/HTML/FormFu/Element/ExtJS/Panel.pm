@@ -53,7 +53,7 @@ __END__
 
 =head1 NAME
 
-HTML::FormFu::Element::Panel - FormFu class for ExtJS panels
+HTML::FormFu::Element::ExtJS::Panel - FormFu class for ExtJS panels
 
 =head1 DESCRIPTION
 

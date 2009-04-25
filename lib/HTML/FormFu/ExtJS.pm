@@ -10,7 +10,7 @@ use Tie::Hash::Indexed;
 use Hash::Merge::Simple qw(merge);
 use Scalar::Util 'blessed';
 use Data::Dumper;
-our $VERSION = '0.070';
+our $VERSION = '0.071';
 $VERSION = eval $VERSION;    # see L<perlmodstyle>
 use HTML::FormFu::Util qw/require_class/;
 
@@ -40,7 +40,7 @@ B<This module is fully compatible with ExtJS 3.0.>
 
 Check out the examples in C<examples/html>
 
-=for html <p> or online at [ <a href="http://search.cpan.org/src/PERLER/HTML-FormFu-ExtJS-0.07/examples/html">Examples</a> ]<p>
+=for html <p> or online at [ <a href="http://search.cpan.org/src/PERLER/HTML-FormFu-ExtJS-0.071/examples/html">Examples</a> ]<p>
 
 
 =head1 METHODS
@@ -704,6 +704,20 @@ so that you can access it from the template.
       $c->stash->{form} = $form;
       $c->stash->{template} = 'javascript.tt2';
   }
+  
+  sub create : Path('/contacts/create') {
+      my ($self, $c) = @_;
+      my $form = new HTML::FormFu::ExtJS;
+      $form->load_config_file('root/forms/form.yml');
+      $form->process($c->req->params);
+      if($form->submitted_and_valid) {
+          # insert into database
+      }
+      
+      $c->stash($form->validation_response);
+      # Make sure a JSON view is called so the stash is serialized
+  }
+  
 
 javascript.tt2:
 
@@ -711,7 +725,12 @@ javascript.tt2:
     form.getForm().submit({
 	  success: function(rst, req) {
         // submission was successful and valid
-    }
+        // you might want to close the form or something
+      },
+      failure: function() {
+        // form validation returned errors
+        // invalid fields are masked automatically  
+      }
   }
   var form = [% form.render %];
   
