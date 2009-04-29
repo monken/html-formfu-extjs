@@ -23,6 +23,9 @@ sub render {
 		}
 	}
 	my $string = js_dumper( { fields => [ "value", "text" ], data => $data } );
+	
+	$super->{store} = \"$super->{store}" if($super->{store} && ref $super->{store} ne "SCALAR");
+	
     return {
 		mode           => "local",
 		editable       => \0,
@@ -65,13 +68,56 @@ The default ExtJS setup is:
 
 This acts like a standard html select box. If you want a more ajaxish select box (e.g. editable) you can override these values with L</attrs|HTML::FormFu>.
 
+The value of C<store> will always be unquoted. You can either provide a variable name which points to an instance
+of an C<Ext.data.Store> class or create the instance right away.
+
+=head2 Remote Store
+
+If you want to load the values of the combo box from an URL you have to create an C<Ext.data.Store> instance:
+
+    var dataStore = new Ext.data.JsonStore({
+        url: '/get_data',
+        root: 'rows',
+        fields: ["text", "id"]
+    });
+    
+C</get_data> has to return a data structure like this:
+    
+    {
+       "rows" : [
+          {
+             "text" : "Item #1",
+             "value" : "1234"
+          }
+       ]
+    }
+    
+To add that store to your Select field, the configuration has to look like this:
+
+  - type: Select
+    name: combo
+    attrs:
+      store: dataStore
+    
+You can also overwrite the field names for C<valueField> and C<displayField> by adding them to the C<attrs>:
+
+    - type: Select
+      name: combo
+      attrs:
+        store: dataStore
+        valueField: title
+        displayField: id
+
+Make sure that the store is loaded before you call C<form.load()> on that form. Otherwise the combo box field cannot
+resolve the value to the corresponding label.
+
 =head1 SEE ALSO
 
 L<HTML::FormFu::Element::Text>
 
 =head1 COPYRIGHT & LICENSE
 
-Copyright 2008 Moritz Onken, all rights reserved.
+Copyright 2009 Moritz Onken, all rights reserved.
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.

@@ -22,3 +22,7 @@ elements:
     value_range:
       - 1
       - 12
+  - type: Select
+    name: store
+    attrs_xml:
+      store: customStore

@@ -473,11 +473,25 @@ sub set_options {
 sub grid_data {
     my $self   = shift;
 	my $data = shift;
-	$self->model('HashRef')->flatten(0);
-	$self->model('HashRef')->options(1);
 	my $param  = shift;
-	$self->set_options(shift);
-    my $rows   = $self->ext_grid_data($data);
+	
+	croak 'First parameter has to be an array ref' unless(ref $data eq "ARRAY");
+	
+	my $rows = [];
+	
+	
+	if(blessed $data->[0]) {
+	
+    	$self->model('HashRef')->flatten(0);
+    	$self->model('HashRef')->options(1);
+    	$self->set_options(shift);
+        $rows   = $self->ext_grid_data($data);
+    
+    } elsif(ref $data->[0] eq "HASH") {
+        $rows   = $self->hashref_grid_data($data);
+    } elsif($data->[0]) {
+        croak 'Elements have to be a hash ref or blessed objects' . (ref $data->[0]);
+    }
     
     my $return = {
         results  => scalar @{$rows},
@@ -489,6 +503,70 @@ sub grid_data {
         }
     };
     return merge $return, $param;
+}
+
+
+sub hashref_grid_data {
+    #carp 'Mia sann im Hashref';
+    my $self = shift;
+    my $data = shift;
+    my @return;
+    my @all_elements = @{ $self->get_all_elements() };
+    my ( %element_cache, %deflator_cache, %inflator_cache, %options_cache );
+    foreach my $datum ( @{$data} ) {
+        my $obj;
+        foreach my $column (@all_elements) {
+            next if ( $column->type =~ /submit/i );
+            my $name    = $column->name;
+            next unless($name);
+            my $element = $element_cache{$name}
+              || $self->get_all_element($name);
+            $element_cache{$name} ||= $element;
+            next unless ($element);
+            $obj->{$name} = $datum->{$name};
+
+            my $inflators = $inflator_cache{$name}
+              || $element->get_inflators;
+            $inflator_cache{$name} ||= $inflators;
+
+            foreach my $inflator ( @{$inflators} ) {
+                $obj->{$name} = $inflator->inflator( $obj->{$name} );
+            }
+
+            my $deflators = $deflator_cache{$name}
+              || $element->get_deflators;
+            $deflator_cache{$name} ||= $deflators;
+
+            foreach my $deflator ( @{$deflators} ) {
+                $obj->{$name} = $deflator->deflator( $obj->{$name} );
+            }
+
+            if(ref $obj->{$name} || blessed $obj->{$name}) {
+                carp "$name was set to undef because it was either blessed or a reference";
+                $obj->{$name} = undef;
+                next;
+            }
+
+            my $can_options = $options_cache{$name}
+              || $element->can("_options");
+            $options_cache{$name} ||= $element->can("_options");
+            if ($can_options) {
+                my @options = @{ $element->_options };
+                my @option = grep { $_->{value} eq $obj->{$name} } @options;
+                unless(@option) {
+                    @options = map { @{$_->{group} || []} } @options;
+                    @option = grep { $_->{value} eq $obj->{$name} } @options ;
+                }
+                $obj->{$name} = { label => join(", ", map { $_->{label} } @option), value => $obj->{$name}};
+            }
+
+            #if($column->type eq "Checkbox") {
+            #    $obj->{$name} = \1 if($obj->{$name});
+            #}
+        }
+        push( @return, $obj );
+    }
+    return \@return;
 }
 
 sub form_data {
@@ -556,7 +634,7 @@ The first column is hidden and contains the value of the select box (e. g. C<0> 
 second column contains the label of the value (e. g. C<male> or C<female>) and is visible.
 
 This way you can access both the value and the label of such a field. Notice the values of
-C<dataIndex> and <id> on those columns. Those correspond with the output of L</grid_data>.
+C<dataIndex> and C<id> on those columns. Those correspond with the output of L</grid_data>.
 
 =cut
 
@@ -600,62 +678,7 @@ sub _record {
     return $data;
 }
 
-# sub ext_grid_data {
-#     my $self = shift;
-#     my $data = shift;
-#     if ( blessed $data && $data->isa("DBIx::Class::ResultSet") ) {
-#         my @data = $data->all;
-#         $data = \@data;
-#     }
-#     my @return;
-#     my @all_elements = @{ $self->get_all_elements() };
-#     my ( %element_cache, %deflator_cache, %options_cache );
-#     foreach my $datum ( @{$data} ) {
-#         my $obj;
-#         foreach my $column (@all_elements) {
-#             next if ( $column->type =~ /submit/i );
-#             my $name    = $column->name;
-# 			next unless($name);
-#             my $element = $element_cache{$name}
-#               || $self->get_all_element($name);
-#             $element_cache{$name} ||= $element;
-#             next unless ($element);
-#             $obj->{$name} = blessed $datum && $datum->can($name) ? $datum->$name : $datum->{$name};
-# 			my $deflators = $deflator_cache{$name}
-#               || $element->get_deflators;
-#             $deflator_cache{$name} ||= $deflators;
-# 
-#             foreach my $deflator ( @{$deflators} ) {
-# 
-#                 $obj->{$name} = $deflator->deflator( $obj->{$name} );
-#             }
-# 
-# 			if(blessed $datum && $datum->can($name) && blessed $datum->$name && $datum->$name->can('count')) {
-# 				$obj->{$name} = $datum->$name->count;
-# 				next;
-# 			}
-# 
-#             my $can_options = $options_cache{$name}
-#               || $element->can("_options");
-#             $options_cache{$name} ||= $element->can("_options");
-#             if ($can_options) {
-#                 my @options = @{ $element->_options };
-#                 my @option = grep { $_->{value} eq $obj->{$name} } @options;
-# 				unless(@option) {
-# 					@options = map { @{$_->{group} || []} } @options;
-# 					@option = grep { $_->{value} eq $obj->{$name} } @options ;
-# 				}
-#                 $obj->{$name} = join(", ", map { $_->{label} } @option);
-#             }
-# 
-# 			if($column->type eq "Checkbox") {
-# 				$obj->{$name} = \1 if($obj->{$name});
-# 			}
-#         }
-#         push( @return, $obj );
-#     }
-#     return \@return;
-# }
+
 
 1;
 
@@ -748,13 +771,6 @@ where this hack failed. But there might be some cases where it does.
 
 Optgroups are partially supported. They render as a normal element of the select box and 
 are therefore selectable.
-
-=head2 L<File|HTML::FormFu::ExtJS::Element::File>
-
-With ExtJS 2.2 comes an option of the form panel which allows file uploads. Make sure you set
-C<fileUpload> at the form panel to C<true>.
-
-See L<http://extjs.com/deploy/dev/docs/?class=Ext.form.BasicForm> / fileUpload.
 
 =head2 L<Buttons|HTML::FormFu::ExtJS::Element::Button>
 

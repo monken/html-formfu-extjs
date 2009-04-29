@@ -11,7 +11,6 @@ my $expected = [
   {
     'layout' => 'hfit',
     'containsScrollbar' => 'true,',
-    'id' => undef,
     'title' => 'Company',
     'autoScroll' => 'true',
     'xtype' => 'panel',
