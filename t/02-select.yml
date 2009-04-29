@@ -26,3 +26,10 @@ elements:
     name: store
     attrs_xml:
       store: customStore
+
+  - type: Select
+    name: remote_store
+    id: remote_store
+    attrs_xml:
+      url: /foobar
+      loading: Wird geladen

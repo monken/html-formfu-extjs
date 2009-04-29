@@ -1,4 +1,4 @@
-use Test::More tests => 6;
+use Test::More tests => 7;
 
 use HTML::FormFu::ExtJS;
 use strict;
@@ -16,6 +16,10 @@ is($rendered->[1]->{emptyText}, "test");
 is($rendered->[1]->{something}, "else");
 
 is(${$rendered->[3]->{store}}, "customStore", "store attribute is unquoted");
+
+is($rendered->[4]->{value}, "Wird geladen", "wird geladen");
+
+use Data::Dumper; print Dumper $rendered->[4];
 
 ok( $form->render_items, "dumping");
 
