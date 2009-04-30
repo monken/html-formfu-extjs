@@ -50,6 +50,11 @@ sub render {
                     else {
                         combobox.setValue('');
                     }
+                },
+                loadexception:function(store, options, response, error) {
+                    var combobox = Ext.getCmp('$super->{id}');
+                    combobox.setValue('');
+                    combobox.markInvalid(error || response.statusText);
                 }
             }
         })";
