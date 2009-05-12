@@ -408,13 +408,12 @@ sub validation_response {
 	$form->model('HashRef')->options(1);
 	$form->set_options(shift);
 	if ( $form->submitted_and_valid ) {
-		my $return = { success => 1 };
+		my $return = { success => \1 };
 		$form->default_values($form->params);
 		$return->{data} = $form->model('HashRef')->create;
 		return $return;
 	} elsif ( $form->has_errors ) {
-		my $return;
-		$return->{success} = 0;
+		my $return = { success => \0 };
 		for ( @{ $form->get_errors } ) {
 			push(
 				@{ $return->{errors} },
