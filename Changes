@@ -1,7 +1,7 @@
 Revision history for Perl extension HTML::FormFu::ExtJS.
 
 0.071_01
-    - Support for a custom store 
+    - Support of custom and remote stores for Select 
     - NotAField?
     - render_values?
 
