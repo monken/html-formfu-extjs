@@ -213,7 +213,12 @@ sub _render_items {
 			|| $element->type eq "Button"
 			|| $element->type eq "Reset"
 			|| $element->type eq "ContentButton" );
-		my $class = "HTML::FormFu::ExtJS::Element::" . $element->type;
+		my $class;
+		if($element->type =~ /^(.*)::Element::(.*?)$/) {
+		    $class = $1 . '::ExtJS::Element::' . $2;
+		} else { 
+		    $class = "HTML::FormFu::ExtJS::Element::" . $element->type;
+	    }
 		require_class($class);
 		push( @{$output}, $class->render($element) );
 	}
@@ -254,7 +259,12 @@ sub _render_buttons {
 			|| $element->type eq "Button"
 			|| $element->type eq "ContentButton"
 			|| $element->type eq "Reset" );
-		my $class = "HTML::FormFu::ExtJS::Element::" . $element->type;
+		my $class;
+		if($element->type =~ /^(.*)::Element::(.*?)$/) {
+		    $class = $1 . '::ExtJS::Element::' . $2;
+		} else { 
+		    $class = "HTML::FormFu::ExtJS::Element::" . $element->type;
+	    }
 		require_class($class);
 		push( @{$output}, $class->render($element) );
 	}
@@ -721,7 +731,45 @@ javascript.tt2:
   var form = [% form.render %];
   
 
+
+=head1 CUSTOM ELEMENTS
+
+If you wish to write your own ExtJS element you have to do the following:
+
+First create an element which is a HTML::FormFu::Element.
+
+  package HTML::FormFu::Element::MyApp::MyField;
+  use base qw(HTML::FormFu::Element::Text);
+  1;
+  
+This is a very basic example for a field which is a text field.
+The ExtJS logic belongs to a different module:
+
+  package HTML::FormFu::ExtJS::Element::MyApp::MyField;
+  use base qw(HTML::FormFu::ExtJS::Element::Text);
+  
+  sub render {
+      # you probably want to overwrite this!
+  }
+  
+  1;
+
+Configure the form as follows:
+
+  $form->populate( { elements => { type => 'MyApp::MyField', ... } } );
+  
+  
+If you don't want to put the element in the HTML::FormFu namespace then you have to
+prepend the class name with a C<+>. In this case the name of the ExtJS class changes
+as well:
+
+  $form->populate( { elements => { type => '+MyApp::Element::MyField', ... } } );
+
+This requires the classes C<MyApp::Element::MyField> and C<MyApp::ExtJS::Element::MyField>.
+The class must be in an C<Element> namespace.
+
 =head1 CAVEATS
+
 
 =head2 L<Multi|HTML::FormFu::ExtJS::Element::Multi>
 

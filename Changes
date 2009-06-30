@@ -1,8 +1,9 @@
 Revision history for Perl extension HTML::FormFu::ExtJS.
 
 0.071_01
-    - Support of custom and remote stores for Select 
-    - render_values?
+    - Support of custom and remote stores for Select (mario)
+    - Support for custom ExtJS elements through the + prefix
+    - Support for multiselect ux (abraxxa)
 
 0.070 April 2009
     - added ExtJS::Panel

@@ -10,10 +10,10 @@ sub render {
 	my $self  = shift;
 	my $super = $class->SUPER::render($self);
 	return {
-		%{$super},
 		xtype     => "checkbox",
 		hideLabel => 1,
 		boxLabel  => $self->label,
+		%{$super},
 		$self->default ? ( inputValue => $self->default ) : ()
 	};
 }

@@ -19,7 +19,7 @@ sub render {
     my $url = $super->{url};
 
     if($url && !$super->{id}) {
-        carp 'Cannot create remote store without an field id';
+        carp 'Cannot create remote store without a field id';
         delete $super->{url};
     }
 
@@ -29,7 +29,44 @@ sub render {
         $attrs->{hiddenValue} = $self->default;
         $super->{value} = $super->{loading} || 'Loading...';
         delete $super->{loading};
-        $attrs->{mode} = "remote";
+        my $load_function;
+        my $load_exception_function;
+        if ($super->{multiple} && $super->{xtype} eq 'multiselect') {
+            $attrs->{xtype} = 'multiselect';
+            $load_function = "
+                    var multiselect = Ext.getCmp('$super->{id}');
+                    var value = multiselect.hiddenValue;
+                    //multiselect.reset();
+                    if (value) {
+                        if (Ext.version = '3.0') {
+                            multiselect.setValue(value);
+                        }
+                        else if (record = store.getById(value)) {
+                            multiselect.setValue(record.data.text);
+                        }
+                    }";
+            $load_exception_function = "
+                    var combobox = Ext.getCmp('$super->{id}');
+                    combobox.markInvalid(error || response.statusText);";
+        }
+        else {
+            $load_function = "
+                    var combobox = Ext.getCmp('$super->{id}');
+                    var value = combobox.hiddenValue;
+                    combobox.clearValue();
+                    if (value) {
+                        if (Ext.version = '3.0') {
+                            combobox.setValue(value);
+                        }
+                        else if (record = store.getById(value)) {
+                            combobox.setValue(record.data.text);
+                        }
+                    }";
+            $load_exception_function = "
+                    var combobox = Ext.getCmp('$super->{id}');
+                    combobox.clearValue();
+                    combobox.markInvalid(error || response.statusText);";
+        }
         $super->{store} = \"new Ext.data.SimpleStore({
             fields:['value','text'],
             id:0,
@@ -41,20 +78,10 @@ sub render {
             }),
             listeners:{
                 load:function(store, records, options) {
-                    var combobox = Ext.getCmp('$super->{id}');
-                    var hiddenfield = combobox.hiddenField;
-                    var value = hiddenfield.value;
-                    if (value && (record = store.getById(value))) {
-                        combobox.setValue(record.data.text);
-                    }
-                    else {
-                        combobox.setValue('');
-                    }
+                    $load_function
                 },
                 loadexception:function(store, options, response, error) {
-                    var combobox = Ext.getCmp('$super->{id}');
-                    combobox.setValue('');
-                    combobox.markInvalid(error || response.statusText);
+                    $load_exception_function
                 }
             }
         })";
@@ -77,7 +104,8 @@ sub render {
     return {
 		editable       => \0,
 		displayField   => "text",
-		valueField     => "value",
+        valueField     => "value",
+        hiddenId       => $self->name . '_hidden',
 		hiddenName     => $self->name,
 		autoWidth      => \0,
 		forceSelection => \1,
@@ -107,6 +135,8 @@ The default ExtJS setup is:
   "editable"       : false,
   "displayField"   : "text",
   "valueField"     : "value",
+  "hiddenId"       : $self->name . '_hidden',
+  "hiddenName"     : $self->name,
   "autoWidth"      : false,
   "forceSelection" : true,
   "triggerAction"  : "all",
@@ -117,6 +147,15 @@ This acts like a standard html select box. If you want a more ajaxish select box
 
 The value of C<store> will always be unquoted. You can either provide a variable name which points to an instance
 of an C<Ext.data.Store> class or create the instance right away.
+
+=head2 MultiSelect
+
+  - type: Select
+    multiple: 1
+    attrs:
+      xtype: multiselect
+
+Requires the MultiSelect user extension.
 
 =head2 Remote Store
 
