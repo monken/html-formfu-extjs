@@ -21,7 +21,7 @@ sub render {
 		hideLabel  => $self->label ? \0 : \1,
 		(scalar $self->id) ? (id => scalar $self->id) : (),
 		$self->nested_name ? (name => $self->nested_name) : (),
-		$self->default ? (value => $value) : (),
+		defined $self->default ? (value => $value) : (),
 		$parent->_get_attributes($self)
 	};
 }
