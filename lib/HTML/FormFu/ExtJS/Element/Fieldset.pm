@@ -20,6 +20,7 @@ sub render {
         $title ? (title => xml_escape( $title )) : (),
         autoHeight  => 1,
         xtype       => "fieldset",
+        nestedName  => $self->nested_name,
         $parent->_get_attributes( $self )
     };
 }
