@@ -732,7 +732,25 @@ javascript.tt2:
   
 
 
-=head1 CUSTOM ELEMENTS
+=head1 FAQ
+
+=head2 How do I do server side validation?
+
+See L</simple form submission and validation> and L</validation_response>.
+
+=head2 And how do I add client side validation?
+
+The FormFu constraints are not yet translated to ExtJS constraints. You can however
+add them manually in your form config:
+
+  - type: Text
+    name: text
+    constraint:
+      - Required
+    attrs:
+      allowBlank: 0
+
+=head2 How do I create custom FormFu::ExtJS elements?
 
 If you wish to write your own ExtJS element you have to do the following:
 
