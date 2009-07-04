@@ -6,6 +6,12 @@ use strict;
 use warnings;
 use utf8;
 
+use HTML::FormFu::ExtJS::Util qw(
+    _camel_case
+    _css_case
+);
+
+
 sub _items {
 	my $class = shift;
 	my $self = shift;
@@ -58,8 +64,8 @@ sub column_model {
 	my $super = $class->SUPER::column_model($self);
 	my $name = $self->nested_name;
 	
-	return ({%{$super}, id => $class->_css_case($name)."-value", dataIndex => $class->_camel_case($name).'Value', hidden => \1 },
-			{%{$super}, id => $class->_css_case($name), dataIndex => $class->_camel_case($name) });
+    return ({%{$super}, id => _css_case($name)."-value", dataIndex => _camel_case($name).'Value', hidden => \1 },
+            {%{$super}, id => _css_case($name), dataIndex => _camel_case($name) });
 	
 }
 
@@ -68,8 +74,8 @@ sub record {
 	my $self = shift;
 	my $super = $class->SUPER::record($self);
 	my $name = $self->nested_name;
-	return ({%{$super}, name => $class->_camel_case($name)."Value", mapping => $self->nested_name.'.value' },
-			{%{$super}, name => $class->_camel_case($name), mapping => $self->nested_name.'.label' });
+	return ({%{$super}, name => _camel_case($name)."Value", mapping => $self->nested_name.'.value' },
+			{%{$super}, name => _camel_case($name), mapping => $self->nested_name.'.label' });
 	
 }
 
