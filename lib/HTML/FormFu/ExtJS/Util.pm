@@ -28,11 +28,14 @@ sub ext_class_of {
     my $element = shift;
     my $classname;
 
-    if ($element->can( 'type' )) {
-        $classname = "HTML::FormFu::ExtJS::Element::" . $element->type;
+    croak "cannot determine ext class for element '" . (ref $element) . "'"
+        unless ($element->can( 'type' ));
+
+    if ($element->type =~ /^(.*)::Element::(.*?)$/) {
+        $classname = $1 . '::ExtJS::Element::' . $2;
     }
     else {
-        croak "cannot determine ext class for element";
+        $classname = "HTML::FormFu::ExtJS::Element::" . $element->type;
     }
     require_class( $classname );
 
