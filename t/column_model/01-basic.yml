@@ -8,7 +8,7 @@
           label: Created
           default_natural: today
           attrs:
-              formatDate: d.m.Y
+              dateFormat: d.m.Y
         - type: Radiogroup
           label: Sex
           name: sex

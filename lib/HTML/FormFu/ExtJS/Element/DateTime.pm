@@ -27,15 +27,15 @@ sub render {
 sub record {
 	my $class = shift;
 	my $self = shift;
-	my $super = $class->SUPER::record($self);
+	my $super = $class->SUPER::record($self, @_);
 	return {%{$super}, type => "date", dateFormat => 'Y-m-d G:i'}
 }
 
 sub column_model {
 	my $class = shift;
 	my $self = shift;
-	my $super = $class->SUPER::column_model($self);
-	my $format = $self->attrs->{format_date} || $self->attrs_xml->{format_date} || 'Y-m-d G:i';
+	my $super = $class->SUPER::column_model($self, @_);
+	my $format = $self->attrs->{dateFormat} || $self->attrs_xml->{dateFormat} || 'Y-m-d G:i';
 	return {%{$super}, renderer => \('Ext.util.Format.dateRenderer("'.$format.'")') }
 }
 
@@ -53,7 +53,7 @@ You cannot put this element in a multi element because it is one itself.
 
 =head2 column_model
 
-To change the format of the date object specify C<< $element->attrs->{format_data} >>.
+To change the format of the date object specify C<< $element->attrs->{dateFormat} >>.
 The date parsing and format syntax is a subset of PHP's date() function.
 See L<http://extjs.com/deploy/dev/docs/?class=Date> for details.
 It defaults to C<Y-m-d G:i> (which is the same as Perl's C<%Y-%m-%d %R>).
