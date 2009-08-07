@@ -5,7 +5,7 @@ use strict;
 use warnings;
 
 my $form = new HTML::FormFu::ExtJS;
-$form->load_config_file("t/50-datetime.yml");
+$form->load_config_file("t/elements/datetime.yml");
 
 like($form->render_items, qr/"value":"\d+-\d+-\d+"/);
 

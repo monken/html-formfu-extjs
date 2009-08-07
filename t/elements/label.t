@@ -5,7 +5,7 @@ use strict;
 use warnings;
 
 my $form = new HTML::FormFu::ExtJS;
-$form->load_config_file("t/01-label.yml");
+$form->load_config_file("t/elements/label.yml");
 
 is_deeply( $form->_render_items,
     [

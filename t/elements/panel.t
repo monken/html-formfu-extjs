@@ -5,7 +5,7 @@ use strict;
 use warnings;
 
 my $form = new HTML::FormFu::ExtJS;
-$form->load_config_file("t/13-panel.yml");
+$form->load_config_file("t/elements/panel.yml");
 
 my $expected = [
   {

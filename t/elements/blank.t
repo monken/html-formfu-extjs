@@ -5,7 +5,7 @@ use strict;
 use warnings;
 
 my $form = new HTML::FormFu::ExtJS;
-$form->load_config_file("t/04-blank.yml");
+$form->load_config_file("t/elements/blank.yml");
 
 ok($form->render_items);
 my $rendered = $form->render_items;

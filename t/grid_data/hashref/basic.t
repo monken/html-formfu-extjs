@@ -10,7 +10,7 @@ use lib qw(t/lib);
 use Data::Dumper;
 
 my $form = new HTML::FormFu::ExtJS;
-$form->load_config_file('t/grid_data/dbic/09-grid_data.yml');
+$form->load_config_file('t/grid_data/dbic/basic.yml');
 
 eval { my $data = $form->grid_data('foo') };
 
@@ -56,17 +56,17 @@ my $rows = [
 ];
 
 $form = new HTML::FormFu::ExtJS;
-$form->load_config_file('t/grid_data/dbic/10-grid_advanced_1.yml');
+$form->load_config_file('t/grid_data/dbic/advanced_1.yml');
 $data = $form->grid_data( $rows );
 is_deeply( $data, $result );
 
 
 $form = new HTML::FormFu::ExtJS;
-$form->load_config_file('t/grid_data/dbic/10-grid_advanced_2.yml');
+$form->load_config_file('t/grid_data/dbic/advanced_2.yml');
 $data = $form->grid_data( $rows );
 is_deeply( $data, $result );
 
 $form = new HTML::FormFu::ExtJS;
-$form->load_config_file('t/grid_data/dbic/10-grid_advanced_3.yml');
+$form->load_config_file('t/grid_data/dbic/advanced_3.yml');
 $data = $form->grid_data( $rows );
 is_deeply( $data, $result );

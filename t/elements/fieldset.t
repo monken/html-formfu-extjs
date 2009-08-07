@@ -5,7 +5,7 @@ use strict;
 use warnings;
 
 my $form = new HTML::FormFu::ExtJS;
-$form->load_config_file("t/03-fieldset.yml");
+$form->load_config_file("t/elements/fieldset.yml");
 
 is_deeply( $form->_render_items,
     [

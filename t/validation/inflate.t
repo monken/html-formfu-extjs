@@ -5,7 +5,7 @@ use strict;
 use warnings;
 
 my $form = new HTML::FormFu::ExtJS;
-$form->load_config_file("t/12-validation_data.yml");
+$form->load_config_file("t/validation/inflate.yml");
 
 $form->process({test => 1, date => '30.09.1985'});
 

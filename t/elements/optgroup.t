@@ -5,7 +5,7 @@ use strict;
 use warnings;
 
 my $form = new HTML::FormFu::ExtJS;
-$form->load_config_file("t/03-optgroup.yml");
+$form->load_config_file("t/elements/optgroup.yml");
 
 my $rendered = $form->_render_items;
 

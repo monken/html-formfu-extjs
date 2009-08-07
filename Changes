@@ -1,10 +1,12 @@
 Revision history for Perl extension HTML::FormFu::ExtJS.
 
-0.071_01
+0.071
     - Support of custom and remote stores for Select
     - Support for custom ExtJS elements through the + prefix
     - Support for multiselect ux (abraxxa)
     - Support of nested_name attribute of FieldSet (mario)
+    - cleanup tests
+    - use Dist::Zilla
 
 0.070 April 2009
     - added ExtJS::Panel

@@ -42,7 +42,7 @@ my $result = {
 my $rs = $schema->resultset("Producer");
 
 my $form = new HTML::FormFu::ExtJS;
-$form->load_config_file('t/grid_data/dbic/11-grid_groups.yml');
+$form->load_config_file('t/grid_data/dbic/groups.yml');
 is_deeply( $form->grid_data( [ $rs->all ] ), $result );
 
 

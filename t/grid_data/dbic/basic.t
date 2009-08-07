@@ -24,7 +24,7 @@ my $schema = DBICTest->init_schema();
 my $rs = $schema->resultset("Artist")->search(undef, {order_by => 'name asc'});
 
 my $form = new HTML::FormFu::ExtJS;
-$form->load_config_file('t/grid_data/dbic/09-grid_data.yml');
+$form->load_config_file('t/grid_data/dbic/basic.yml');
 
 eval { my $data = $form->grid_data('foo') };
 

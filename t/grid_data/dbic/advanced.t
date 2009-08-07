@@ -41,18 +41,18 @@ my $rs =
   $schema->resultset("Artist")->search( undef, { order_by => 'name asc' } );
 
 my $form = new HTML::FormFu::ExtJS;
-$form->load_config_file('t/grid_data/dbic/10-grid_advanced_1.yml');
+$form->load_config_file('t/grid_data/dbic/advanced_1.yml');
 my $data = $form->grid_data( [ $rs->all ] );
 is_deeply( $data, $result );
 
 
 $form = new HTML::FormFu::ExtJS;
-$form->load_config_file('t/grid_data/dbic/10-grid_advanced_2.yml');
+$form->load_config_file('t/grid_data/dbic/advanced_2.yml');
 $data = $form->grid_data( [ $rs->all ] );
 is_deeply( $data, $result );
 
 $form = new HTML::FormFu::ExtJS;
-$form->load_config_file('t/grid_data/dbic/10-grid_advanced_3.yml');
+$form->load_config_file('t/grid_data/dbic/advanced_3.yml');
 $data = $form->grid_data( [ $rs->all ] );
 is_deeply( $data, $result );
 
@@ -82,17 +82,17 @@ $result = {
 my $rows = [ $rs->all ];
 
 $form = new HTML::FormFu::ExtJS;
-$form->load_config_file('t/grid_data/dbic/10-grid_advanced_1.yml');
+$form->load_config_file('t/grid_data/dbic/advanced_1.yml');
 my $data = $form->grid_data( $rows );
 is_deeply( $data, $result );
 
 
 $form = new HTML::FormFu::ExtJS;
-$form->load_config_file('t/grid_data/dbic/10-grid_advanced_2.yml');
+$form->load_config_file('t/grid_data/dbic/advanced_2.yml');
 $data = $form->grid_data( $rows );
 is_deeply( $data, $result );
 
 $form = new HTML::FormFu::ExtJS;
-$form->load_config_file('t/grid_data/dbic/10-grid_advanced_3.yml');
+$form->load_config_file('t/grid_data/dbic/advanced_3.yml');
 $data = $form->grid_data( $rows );
 is_deeply( $data, $result );
