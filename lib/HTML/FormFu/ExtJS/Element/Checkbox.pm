@@ -13,6 +13,7 @@ sub render {
 		xtype     => "checkbox",
 		hideLabel => 1,
 		boxLabel  => $self->label,
+		checked => $self->default ? \1 : \0,
 		%{$super},
 		$self->default ? ( inputValue => $self->default ) : ()
 	};
