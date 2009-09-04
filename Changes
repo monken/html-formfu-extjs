@@ -8,6 +8,7 @@ Revision history for Perl extension HTML::FormFu::ExtJS.
     - cleanup tests
     - use Dist::Zilla
     - Checkboxes with a true value set will be rendered as checked
+    - Switched to github
 
 0.070 April 2009
     - added ExtJS::Panel
