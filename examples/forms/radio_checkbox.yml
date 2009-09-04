@@ -5,5 +5,10 @@ elements:
     label: test
   - type: Checkbox
     name: foo2
-    label: test3
+    default: 1
+    label: Checked
+  - type: Checkbox
+    name: foo3
+    label: Unchecked
+    
     

@@ -378,12 +378,7 @@ sub _get_attributes {
             my $type = ref( $source->$attr->{$key} );
             if ($type eq "HTML::FormFu::Literal") {
                 $obj->{$key} = "" . $source->$attr->{$key};
-            }
-            elsif ($type eq "ARRAY" || $type eq "HASH") {
-                my $data = js_dumper( $source->$attr->{$key} );
-                $obj->{$key} = \$data;
-            }
-            else {
+            } else {
                 $obj->{$key} = $source->$attr->{$key};
             }
 		}

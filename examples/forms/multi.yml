@@ -26,7 +26,7 @@ elements:
       defaults:
         width: 50
       width: 150
-      individualWidth: []
+#      individualWidth: []
       labelWidth: 35
       layoutConfig:
         labelSeparator:  .:.
@@ -45,7 +45,9 @@ elements:
     attrs:
       defaults:
         width: 50
-      individualWidth: [210, 123]
+      individualWidth: 
+        - 210
+        - 123
       labelWidth: 35
       layoutConfig:
         labelSeparator:  .:.
@@ -63,7 +65,9 @@ elements:
     attrs:
       defaults:
         width: 50
-      individualWidth: [210, 123]
+      individualWidth: 
+        - 210
+        - 123
       labelWidth: 35
       layoutConfig:
         labelSeparator:  .:.
@@ -82,7 +86,9 @@ elements:
     attrs:
       defaults:
         width: 50
-      individualColumnWidth: [.2, .2]
+      individualColumnWidth: 
+        - 0.2
+        - 0.2
       labelWidth: 35
     elements:
       - type: Text

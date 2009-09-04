@@ -11,7 +11,7 @@
 
 Ext.onReady(function(){
 
-    var simple = new Ext.FormPanel({"width":800,"baseParams":{"x-requested-by":"ExtJS"},"frame":true,"action":"","title":"HTML::FormFu::ExtJS - radio_checkbox","method":"post","buttons":[],"items":[{"hideLabel":1,"boxLabel":"test","name":"foo","fieldLabel":"test","xtype":"radio"},{"hideLabel":1,"boxLabel":"test3","name":"foo2","fieldLabel":"test3","xtype":"checkbox"}]});;
+    var simple = new Ext.FormPanel({"width":800,"baseParams":{"x-requested-by":"ExtJS"},"frame":true,"action":"","title":"HTML::FormFu::ExtJS - radio_checkbox","method":"post","buttons":[],"items":[{"hideLabel":1,"boxLabel":"test","name":"foo","fieldLabel":"test","xtype":"radio"},{"inputValue":1,"checked":true,"hideLabel":false,"boxLabel":"Checked","value":1,"name":"foo2","fieldLabel":"Checked","xtype":"checkbox"},{"checked":false,"hideLabel":false,"boxLabel":"Unchecked","name":"foo3","fieldLabel":"Unchecked","xtype":"checkbox"}]});;
 
     simple.render(document.body);
 });

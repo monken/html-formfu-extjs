@@ -3,6 +3,7 @@
       - type: Checkboxgroup
         label: Fancy Checkboxgroups
         name: foo
+        default: [1a]
         options:
           - label: "group 1"
             group:
