@@ -122,7 +122,7 @@ The returned perl object looks something like this:
 
 The C<metaData> property does some kind of magic on the client side. Read L<http://extjs.com/deploy/dev/docs/?class=Ext.data.JsonReader> for more information.
 
-Sometimes you need to send a different number of results back to the client than there are rows (i.e. paged grid view).
+Sometimes you need to send a different number of results back to the client than there are rows (e. g. paged grid view).
 Therefore you can override every item of the perl object by passing a hashref.
 
   $form->grid_data($data, {results => 99});
@@ -833,10 +833,6 @@ second column.
 Each element in a C<Block> element is rendered normally. The C<tag> config option has no
 influence. If the C<Block> element contains a C<content> it is rendered like 
 a L<Src|HTML::FormFu::ExtJS::Element::Src> element.
-
-=head1 SUBVERSION REPOSITORY
-
-Latest development version is avaiable from L<http://html-formfu.googlecode.com/svn/trunk/HTML-FormFu-ExtJS/>.
 
 =head1 TODO
 

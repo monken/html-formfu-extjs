@@ -1,5 +1,8 @@
 Revision history for Perl extension HTML::FormFu::ExtJS.
 
+0.072 2009-09-12
+    - Changed the default dateFormat to be c (ISO8601)
+
 0.071
     - Support of custom and remote stores for Select
     - Support for custom ExtJS elements through the + prefix

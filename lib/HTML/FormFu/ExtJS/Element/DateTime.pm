@@ -43,14 +43,14 @@ sub record {
 	my $class = shift;
 	my $self = shift;
 	my $super = $class->SUPER::record($self, @_);
-	return {%{$super}, type => "date", dateFormat => 'Y-m-d G:i'}
+	return {%{$super}, type => "date", dateFormat => 'c'}
 }
 
 sub column_model {
 	my $class = shift;
 	my $self = shift;
 	my $super = $class->SUPER::column_model($self, @_);
-	my $format = $self->attrs->{dateFormat} || $self->attrs_xml->{dateFormat} || 'Y-m-d G:i';
+	my $format = $self->attrs->{dateFormat} || $self->attrs_xml->{dateFormat} || 'c';
 	return {%{$super}, renderer => \('Ext.util.Format.dateRenderer("'.$format.'")') }
 }
 
