@@ -1,5 +1,8 @@
 package HTML::FormFu::ExtJS::Element::DateTime;
-use base "HTML::FormFu::ExtJS::Element::Multi";
+use base "HTML::FormFu::ExtJS::Element::_Field";
+
+use HTML::FormFu::ExtJS::Element::Select;
+use HTML::FormFu::ExtJS::Element::Date;
 
 use strict;
 use warnings;
@@ -10,18 +13,30 @@ sub render {
 	my $class = shift;
 	my $self  = shift;
 	$self->process;
+	$self->deflator({ type => 'Strftime', strftime => '%FT%T%Z'});
+	$self->strftime('%FT%T%Z');
 	my @value;
 	for(1..3) {
 		push(@value, sprintf("%02d", $self->get_element->default));
 		$self->remove_element( $self->get_element );
 	}
-	for(0..1) {
-		$self->get_elements->[$_]->attrs({width => 50});
-	}
-	my $date = $self->form->element({type => "Date", value => join('-', @value)});
-	$self->insert_before($date, $self->get_element);
-	my $super = $class->SUPER::render($self);
-	return $super;
+	my $date = $self->form->element({type => "Date", value => join('-', @value) });
+	my $data = [HTML::FormFu::ExtJS::Element::Date->render($date)];
+	for(1..2) {
+	    my $element = $self->get_element;
+    	$element->attrs->{width} = 50;
+    	push(@$data, HTML::FormFu::ExtJS::Element::Select->render( $element ));
+    	$self->remove_element( $element );
+    }
+    
+    $self->_elements([]);
+    
+    unshift(@$data, { fieldLabel => $self->label, xtype => "textfield", hidden => \1})
+        if($self->label);
+    $data = [map { { layout => 'form', items => $_ } } @$data];
+    
+	
+    return { layout => "form", items => [ { layout => "column", items => $data } ] };
 }
 
 sub record {

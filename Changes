@@ -9,6 +9,7 @@ Revision history for Perl extension HTML::FormFu::ExtJS.
     - use Dist::Zilla
     - Checkboxes with a true value set will be rendered as checked
     - Switched to github
+    - fixed DateTime element
 
 0.070 April 2009
     - added ExtJS::Panel

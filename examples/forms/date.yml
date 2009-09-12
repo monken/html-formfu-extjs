@@ -13,5 +13,5 @@ elements:
   - type: DateTime
     name: datetime
     label: Date & Time
-    default_natural: today
+    default_natural: now
     

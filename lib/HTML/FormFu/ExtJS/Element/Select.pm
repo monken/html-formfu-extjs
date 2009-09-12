@@ -98,7 +98,7 @@ sub render {
     		}
     	}
     	my $string = js_dumper( { fields => [ "value", "text" ], data => $data } );
-        $super->{store} = \"new Ext.data.SimpleStore(" . $string . ")";
+        $super->{store} = \("new Ext.data.SimpleStore(" . $string . ")");
     }
 
     return {
