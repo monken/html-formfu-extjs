@@ -29,8 +29,6 @@ sub render {
     	$self->remove_element( $element );
     }
     
-    $self->_elements([]);
-    
     unshift(@$data, { fieldLabel => $self->label, xtype => "textfield", hidden => \1})
         if($self->label);
     $data = [map { { layout => 'form', items => $_ } } @$data];

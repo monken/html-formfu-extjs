@@ -13,7 +13,6 @@ sub render {
 	$self->strftime('%Y-%m-%d');
 	$self->default(sprintf("%04s-%02s-%02s", $self->year->{default},$self->month->{default},$self->day->{default}))
 	if($self->year->{default} && $self->month->{default} && $self->day->{default});
-	
 	my $super = $class->SUPER::render($self);
 	return { %{$super}, xtype => "datefield" };
 	
@@ -23,6 +22,7 @@ sub render {
 sub record {
 	my $class = shift;
 	my $self = shift;
+	use Data::Dumper; $Data::Dumper::Indent = 1; warn Dumper $self unless($self->name);
 	my $super = $class->SUPER::record($self, @_);
 	return {%{$super}, type => "date", dateFormat => 'Y-m-d'}
 }
