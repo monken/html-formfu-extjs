@@ -10,8 +10,6 @@ use Tie::Hash::Indexed;
 use Hash::Merge::Simple qw(merge);
 use Scalar::Util 'blessed';
 use Data::Dumper;
-our $VERSION = '0.073';
-$VERSION = eval $VERSION;    # see L<perlmodstyle>
 
 use HTML::FormFu::ExtJS::Util qw(
     ext_class_of
@@ -44,7 +42,7 @@ B<This module is fully compatible with ExtJS 3.0.>
 
 Check out the examples in C<examples/html>
 
-=for html <p> or online at [ <a href="http://search.cpan.org/src/PERLER/HTML-FormFu-ExtJS-0.071/examples/html">Examples</a> ]<p>
+=for html <p> or online at [ <a href="http://search.cpan.org/src/PERLER/HTML-FormFu-ExtJS-0.074/examples/html">Examples</a> ]<p>
 
 
 =head1 METHODS

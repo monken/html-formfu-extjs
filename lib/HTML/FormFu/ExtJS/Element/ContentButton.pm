@@ -19,7 +19,7 @@ sub render {
 
 =head1 NAME
 
-HTML::FormFu::ExtJS::Element::Button - Button
+HTML::FormFu::ExtJS::Element::ContentButton - Button
 
 =head1 DESCRIPTION
 
@@ -30,7 +30,7 @@ L<HTML::FormFu::Element::Image>
 
 =head1 COPYRIGHT & LICENSE
 
-Copyright 2008 Moritz Onken, all rights reserved.
+Copyright 2009 Moritz Onken, all rights reserved.
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.

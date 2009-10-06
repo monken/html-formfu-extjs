@@ -46,7 +46,7 @@ CREATE TABLE cd_to_producer (
 CREATE TABLE artist (
   artistid INTEGER PRIMARY KEY NOT NULL,
   name varchar(100),
-  birthday timestamp,
+  birthday date,
   sex INTEGER
 );
 

@@ -1,7 +1,9 @@
 package # hide from PAUSE 
     DBICTest::Schema::Artist;
 
-use base 'DBIx::Class::Core';
+use base 'DBIx::Class';
+
+__PACKAGE__->load_components(qw(InflateColumn::DateTime Core));
 
 __PACKAGE__->table('artist');
 __PACKAGE__->source_info({
@@ -20,7 +22,7 @@ __PACKAGE__->add_columns(
     is_nullable => 1,
   }	,
 	  'birthday' => {
-		data_type => 'timestamp',
+		data_type => 'date',
 	}	,
 		  'sex' => {
 			data_type => 'integer',

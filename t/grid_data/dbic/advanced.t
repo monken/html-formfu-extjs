@@ -7,7 +7,7 @@ use warnings;
 use lib qw(t/lib);
 
 BEGIN {
-	eval "use DBIx::Class; use DBD::SQLite; use HTML::FormFu::Model::DBIC;";
+	eval "use DBIx::Class; use DBIx::Class::InflateColumn::DateTime; use DBD::SQLite; use HTML::FormFu::Model::DBIC;";
     plan $@
         ? ( skip_all => 'needs DBIx::Class, HTML::FormFu::Model::DBIC and DBD::SQLite for testing' )
       : ( tests => 6 );

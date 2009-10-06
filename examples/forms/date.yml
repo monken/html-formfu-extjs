@@ -6,7 +6,7 @@ elements:
   - type: Date
     name: date2
     label: Default
-    default_natural: 'today'
+    default_natural: now
   - type: Date
     name: date
     label: Date

@@ -12,7 +12,7 @@ sub render {
 	$self->_date_defaults;
 	$self->strftime('%Y-%m-%d');
 	$self->default(sprintf("%04s-%02s-%02s", $self->year->{default},$self->month->{default},$self->day->{default}))
-	if($self->year->{default} && $self->month->{default} && $self->day->{default});
+	if((defined $self->default || defined $self->default_natural) && $self->year->{default} && $self->month->{default} && $self->day->{default});
 	my $super = $class->SUPER::render($self);
 	return { %{$super}, xtype => "datefield" };
 	
