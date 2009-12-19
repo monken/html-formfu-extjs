@@ -6,8 +6,8 @@ elements:
     label_loc: Company
     attributes_xml:
       layout:     hfit
-      containsScrollbar: true,
-      autoScroll: true
+      containsScrollbar: 'true'
+      autoScroll: 'true'
     elements:
       - type: Text
         name: test

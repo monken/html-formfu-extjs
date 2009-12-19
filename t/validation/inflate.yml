@@ -6,8 +6,8 @@ elements:
     name: date
     deflator:
         - type: Strftime
-          strftime: %Y-%m-%d
+          strftime: '%Y-%m-%d'
     inflator:
         - type: DateTime
           parser:
-            strptime: %d.%m.%Y
+            strptime: '%d.%m.%Y'

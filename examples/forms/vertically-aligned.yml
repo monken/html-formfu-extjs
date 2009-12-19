@@ -1,6 +1,6 @@
 ---
 id: form
-auto_id: %n
+auto_id: '%n'
 auto_fieldset:
   legend: A fieldset
 

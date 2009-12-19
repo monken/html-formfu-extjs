@@ -1,5 +1,9 @@
 Revision history for Perl extension HTML::FormFu::ExtJS.
 
+0.075 2009-12-19
+    - fixed tests to be YAML::XS compliant
+    - adjusted HTML::FormFu prereq accordingly
+
 0.072 2009-09-12
     - Changed the default dateFormat to be c (ISO8601)
 

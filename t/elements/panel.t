@@ -10,7 +10,7 @@ $form->load_config_file("t/elements/panel.yml");
 my $expected = [
   {
     'layout' => 'hfit',
-    'containsScrollbar' => 'true,',
+    'containsScrollbar' => 'true',
     'title' => 'Company',
     'autoScroll' => 'true',
     'xtype' => 'panel',
