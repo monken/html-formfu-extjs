@@ -846,12 +846,5 @@ a L<Src|HTML::FormFu::ExtJS::Element::Src> element.
 
 L<HTML::FormFu>, L<JavaScript::Dumper>
 
-=head1 COPYRIGHT & LICENSE
-
-Copyright 2008-2009 Moritz Onken, all rights reserved.
-
-This program is free software; you can redistribute it and/or modify it
-under the same terms as Perl itself.
-
 
 =cut
