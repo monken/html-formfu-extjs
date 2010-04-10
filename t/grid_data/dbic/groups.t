@@ -30,7 +30,8 @@ my $result = {
             { 'name' => 'cds', 'type' => 'string' , mapping => 'cds.label' }
         ],
         'totalProperty' => 'results',
-        'root'          => 'rows'
+        'root'          => 'rows',
+        idProperty => 'id',
     },
     'rows' => [
         { 'cds' => 1, 'name' => 'Matt S Trout',       'producerid' => '1' },
@@ -55,7 +56,8 @@ $result = {
             { 'name' => 'cds', 'type' => 'string' , mapping => 'cds.label' }
         ],
         'totalProperty' => 'results',
-        'root'          => 'rows'
+        'root'          => 'rows',
+        idProperty => 'id',
     },
     'rows' => [
         { 'cds' => undef, 'name' => 'Matt S Trout',       'producerid' => '1' },

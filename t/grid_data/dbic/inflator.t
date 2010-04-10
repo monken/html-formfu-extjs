@@ -36,7 +36,8 @@ my $result = {
             { 'name' => 'birthday',  'type' => 'date', dateFormat => 'Y-m-d', mapping => 'birthday' },
         ],
         'totalProperty' => 'results',
-        'root'          => 'rows'
+        'root'          => 'rows',
+        idProperty => 'id',
     },
     'rows' => [
         { artistid => '100', birthday => '2009-10-22',},

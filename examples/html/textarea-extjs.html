@@ -11,7 +11,7 @@
 
 Ext.onReady(function(){
 
-    var simple = new Ext.FormPanel({"width":800,"baseParams":{"x-requested-by":"ExtJS"},"frame":true,"action":"","title":"HTML::FormFu::ExtJS - textarea","method":"post","buttons":[],"items":[{"hideLabel":false,"fieldLabel":"Title","xtype":"textfield"},{"hideLabel":false,"fieldLabel":"Write it down","rows":20,"xtype":"textarea","cols":40},{"wysiwyg":1,"value":"or as a wysiwyg editor","hideLabel":true,"name":"html","fieldLabel":null,"rows":20,"xtype":"htmleditor","cols":40}]});;
+    var simple = new Ext.FormPanel({"width":800,"baseParams":{"x-requested-by":"ExtJS"},"frame":true,"action":"","title":"HTML::FormFu::ExtJS - textarea","method":"post","buttons":[],"items":[{"hideLabel":false,"xtype":"textfield","fieldLabel":"Title"},{"hideLabel":false,"rows":20,"xtype":"textarea","cols":40,"fieldLabel":"Write it down"},{"wysiwyg":1,"value":"or as a wysiwyg editor","hideLabel":true,"name":"html","rows":20,"xtype":"htmleditor","cols":40,"fieldLabel":null}]});;
 
     simple.render(document.body);
 });

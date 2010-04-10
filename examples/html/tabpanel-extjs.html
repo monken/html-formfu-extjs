@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>tabpanel</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="../ext/resources/css/ext-all.css"/>
+    <script type="text/javascript" src="../ext/adapter/ext/ext-base.js"></script>
+    <script type="text/javascript" src="../ext/ext-all.js"></script>
+<script type="text/Javascript">
+
+Ext.onReady(function(){
+
+    var simple = new Ext.FormPanel({"width":800,"standardSubmit":1,"baseParams":{"x-requested-by":"ExtJS"},"frame":true,"action":"","title":"HTML::FormFu::ExtJS - tabpanel","method":"post","buttons":[],"items":[{"activeTab":1,"animScroll":1,"minTabWidth":150,"xtype":"tabpanel","height":300,"border":1,"resizeTabs":1,"enableTabScroll":1,"tabWidth":200,"items":[{"xtype":"panel","layout":"form","title":"Tab1","items":[{"hideLabel":false,"name":"tab1input1","xtype":"textfield","fieldLabel":"Tab1-Input1"},{"hideLabel":false,"name":"tab1input2","xtype":"textfield","fieldLabel":"Tab1-Input2"}]},{"xtype":"panel","layout":"form","title":"Tab2","items":[{"hideLabel":false,"name":"tab2input1","xtype":"textfield","fieldLabel":"Tab2-Input1"},{"hideLabel":false,"name":"tab2input2","xtype":"textfield","fieldLabel":"Tab2-Input2"}]}]}]});;
+
+    simple.render(document.body);
+});
+</script>
+
+</head>
+<body>
+
+
+<a href="../forms/tabpanel.yml">Form config file</a><br/><br/>
+
+
+
+</body>
+</html>
+

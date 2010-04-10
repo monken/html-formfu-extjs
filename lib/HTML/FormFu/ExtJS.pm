@@ -485,6 +485,7 @@ sub grid_data {
         metaData => {
             totalProperty => 'results',
             root          => 'rows',
+            idProperty => 'id',
             fields        => $self->_record
         }
     };

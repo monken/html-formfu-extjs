@@ -27,7 +27,8 @@ my $result = {
             { 'name' => 'cds',  'type' => 'string', mapping => 'cds' }
         ],
         'totalProperty' => 'results',
-        'root'          => 'rows'
+        'root'          => 'rows',
+        idProperty => 'id',
     },
     'rows' => [
         { 'cds' => 3, 'name' => 'Caterwauler McCrae', sex => {label => 'male', value => 0 }},
@@ -69,7 +70,8 @@ $result = {
             { 'name' => 'cds',  'type' => 'string', mapping => 'cds' }
         ],
         'totalProperty' => 'results',
-        'root'          => 'rows'
+        'root'          => 'rows',
+        idProperty => 'id',
     },
     'rows' => [
         { 'cds' => undef, 'name' => 'Caterwauler McCrae', sex => {label => 'male', value => 0 }},
@@ -83,7 +85,7 @@ my $rows = [ $rs->all ];
 
 $form = new HTML::FormFu::ExtJS;
 $form->load_config_file('t/grid_data/dbic/advanced_1.yml');
-my $data = $form->grid_data( $rows );
+$data = $form->grid_data( $rows );
 is_deeply( $data, $result );
 
 
